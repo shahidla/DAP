@@ -1,0 +1,54 @@
+{
+  "name": "managedAppCAPProject",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^6",
+    "@sap/xsenv": "^3.3.2",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "hdb": "^0.19.0",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.108.7",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-feproject-ui": "cds watch --open feproject-ui/webapp/index.html?sap-ui-xx-viewCache=false",
+    "app": "npm start --prefix app",
+    "undeploy": "cf undeploy managedAppCAPProject --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "build": {
+      "tasks": [
+        {
+          "for": "hana",
+          "dest": "../db"
+        },
+        {
+          "for": "node-cf"
+        }
+      ]
+    },
+    "requires": {
+      "db": {
+        "kind": "hana-cloud"
+      },
+      "auth": "xsuaa",
+      "[hybrid]": {
+        "auth": "dummy"
+      }
+    }
+  },
+  "sapux": [
+    "app/feproject-ui"
+  ]
+}

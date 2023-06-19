@@ -1,0 +1,54 @@
+{
+  "name": "QH",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.2.0",
+    "@sap/cds": "^6",
+    "@sap/xsenv": "^3.1.0",
+    "@sap/xssec": "^3.2.17",
+    "express": "^4",
+    "passport": "^0.4.1"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.108.7",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-feproject-ui": "cds watch --open feproject-ui/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy QH --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      },
+      "emp": {
+        "kind": "odata-v2",
+        "model": "srv/external/emp",
+        "[production]": {
+          "credentials": {
+            "destination": "SD5",
+            "destinationPath": "/sap/opu/odata/sap/ZPERSDATA_CDS"
+          }
+        }
+      },
+      "zhr_person_extn_srv": {
+        "kind": "odata-v2",
+        "model": "srv/external/zhr_person_extn_srv"
+      }
+    }
+  },
+  "sapux": [
+    "app/feproject-ui"
+  ]
+}

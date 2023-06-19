@@ -1,0 +1,162 @@
+_schema-version: "3.1"
+ID: QH
+description: A simple CAP project.
+version: 1.0.0
+modules:
+  - name: QH-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: SD5-destination
+      - name: SD5-connection      
+      - name: uaa_QH
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      host: ${appname}
+      memory: 256M
+      disk-quota: 512M
+    build-parameters:
+      builder: npm-ci
+      ignore:
+        - ".env"
+        - "node_modules/"      
+
+
+
+
+
+
+
+  - name: QH-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: QH-destination-service
+        parameters:
+          content-target: true
+      - name: QH_html_repo_host
+        parameters:
+          service-key:
+            name: QH_html_repo_host-key
+      - name: uaa_QH
+        parameters:
+          service-key:
+            name: uaa_QH-key
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+      content:
+        instance:
+          destinations:
+            - Name: managedRouterCapProject_QH_html_repo_host
+              ServiceInstanceName: QH-html5-app-host-service
+              ServiceKeyName: QH_html_repo_host-key
+              sap.cloud.service: managedRouterCapProject
+            - Authentication: OAuth2UserTokenExchange
+              Name: managedRouterCapProject_uaa_QH
+              ServiceInstanceName: QH-xsuaa-service
+              ServiceKeyName: uaa_QH-key
+              sap.cloud.service: managedRouterCapProject
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+  - name: QH-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: QH_html_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - qhdapfeprojectui.zip
+          name: qhdapfeprojectui
+          target-path: resources/
+  - name: qhdapfeprojectui
+    type: html5
+    path: app/feproject-ui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: 
+        []
+resources:
+
+
+
+
+
+
+
+  - name: QH-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+              - Authentication: NoAuthentication
+                Name: cap-catalog-api
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://${appname}.${default-domain}
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true                
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: QH-destination-service
+      service-plan: lite
+  - name: QH_html_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: QH-html5-app-host-service
+      service-plan: app-host
+  - name: uaa_QH
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: QH-xsuaa-service
+      service-plan: application
+      config:
+        xsappname: managedAppCAPProject-${org}-${space}
+        tenant-mode: dedicated      
+
+  - name: SD5-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: SD5-destination
+  - name: SD5-connection
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+              
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  appname: DigitalPassportApplication
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx -p @sap/cds-dk cds build --production
