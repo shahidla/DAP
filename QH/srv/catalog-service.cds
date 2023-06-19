@@ -1,5 +1,5 @@
 using { emp } from './external/emp';
-using { qhemp } from './external/zhr_person_extn_srv';
+using { zhr_person_extn_srv  } from './external/zhr_person_extn_srv';
 
 service CatalogService {
 
@@ -11,7 +11,7 @@ service CatalogService {
 
     @readonly
     @requires: 'authenticated-user'
-    entity QHEmployees as projection on qhemp.zhr_person_extn_srv;
+    entity QHEmployees as projection on zhr_person_extn_srv.PersonIdentitySet;
 
 
 }
