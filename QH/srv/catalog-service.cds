@@ -16,7 +16,11 @@ service CatalogService {
 
     //@readonly
    // @requires: 'authenticated-user'
-    entity QHPerson as projection on zhr_person_extn_srv.PersonIdentitySet;
+    entity QHPerson as projection on zhr_person_extn_srv.PersonIdentitySet
+    {
+        *,
+        ' ' as custom : String
+    };
 
     entity QHPosition as projection on zhr_person_extn_srv.PositionSet;
     
