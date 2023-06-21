@@ -1,49 +1,39 @@
-using { emp } from './external/emp';
-using { zhr_person_extn_srv  } from './external/zhr_person_extn_srv';
+using {emp} from './external/emp';
+using {zhr_person_extn_srv} from './external/zhr_person_extn_srv';
 using qh.employees as my from '../db/schema';
 
 service CatalogService {
 
-//@requires: 'authenticated-user'
-    @readonly entity Person as projection on my.PersonData;
+    //@requires: 'authenticated-user'
+    @readonly
+    entity PersonSrv                     as projection on my.PersonDataEnt;
 
-
-    // @readonly
-    // entity Interactions_Header as projection on local.Interactions_Header;
     @readonly
     //@requires: 'authenticated-user'
-    entity Employees as projection on emp.zpersdata;
-
-    //@readonly
-   // @requires: 'authenticated-user'
-    entity QHPerson as projection on zhr_person_extn_srv.PersonIdentitySet
-    {
-        *,
-        ' ' as custom : String
-    };
-
-    entity QHPosition as projection on zhr_person_extn_srv.PositionSet;
+    entity Employees                  as projection on emp.zpersdata;
+    @cds.redirection.target     //DELETE DUPLICATE ENTITIES
+    entity QHPosition                 as projection on zhr_person_extn_srv.PositionSet;
+    entity QHPersonIdentity           as projection on zhr_person_extn_srv.PersonIdentitySet;
+    entity QHPersonnelAssignments     as projection on zhr_person_extn_srv.PersonnelAssignmentsSet;
     
- 
- 
+    entity PersonProfileContact       as projection on zhr_person_extn_srv.PersonProfileContactSet;
+    entity PersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet;
+    entity Position                   as projection on my.Position;
+
+    entity PersonProfileTask          as
+        select from zhr_person_extn_srv.PersonProfileTaskSet as personItems
+        left join PersonProfleQualifications
+            on  personItems.pan = PersonProfleQualifications.pan
+            and personItems.pid = PersonProfleQualifications.pid
+        {
+            personItems.due                       as due,
+            PersonProfleQualifications.positionId as positionId
+        };
+
+    @readonly
+    //@requires: 'authenticated-user'
+    entity personItems                as projection on my.personItems
 }
 
 
 
-// New UI annotations
-annotate CatalogService.Employees with @(
-    UI : { 
-        SelectionFields  : [
-            Pemail
-        ],
-        LineItem  : [
-            { Value : Pemail },
-            { Value : Pfname }, 
-            { Value : Phloc }                                   
-        ],
-     }
-){
-    Pemail @( title: 'Email' );    
-    Pfname @( title: 'Name' );
-    Phloc @( title: 'Location' );
-};

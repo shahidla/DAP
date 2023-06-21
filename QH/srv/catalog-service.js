@@ -1,63 +1,72 @@
-module.exports = cds.service.impl(async function () {
-	const cds = require('@sap/cds');
-	const EmpService = await cds.connect.to('emp')
-	const QHService = await cds.connect.to('zhr_person_extn_srv')
-	const { QHPerson, QHPosition } = QHService.entities('CatalogService') 
-   
-	this.on('READ','Employees', request => {
-		return res = EmpService.run(request.query)
-	})
+const cds = require('@sap/cds');
 
-	this.on('READ','QHPosition',async (request) => {
+module.exports = async srv => {
 
-		// let query = SELECT.from(`${QHPerson.name} as B`)
-		// .join(`${QHPosition.name} as A`)
-		// .on('B.PID','=','A.PERSONNUMBER')
-		
-        // console.log(query)
+    // const { PersonSrv } = srv.entities
 
-		// return results = await cds.run(query)
-		return QHService.run(request.query)
-	   
-	})
+    const EmpService = await cds.connect.to('emp')
+    const QHService = await cds.connect.to('zhr_person_extn_srv')
+    const { QHPosition, QHPersonIdentity, QHPersonnelAssignments,PersonProfleQualifications } = QHService.entities('CatalogService')
+    srv.on('READ', 'PersonSrv', async (req) => {
+        // // execute the query        
+        const output = [];
+        const personals = []
+        const qpos = SELECT.from('CatalogService.QHPosition')
+        const posres = await cds.run(qpos)
 
-	this.on('READ','QHPerson',async (req) => {
-      
-        let PerPersonalQuery = SELECT.from(req.query.SELECT.from)
-            .limit(req.query.SELECT.limit)
-        if (req.query.SELECT.where) {
-            PerPersonalQuery.where(req.query.SELECT.where)
-        }
-        if (req.query.SELECT.orderBy) {
-            PerPersonalQuery.orderBy(req.query.SELECT.orderBy)
-        }
+        const PersonData = posres.map(async (position) => {
 
-		let personal = await QHService.tx(req).send({
-            query: PerPersonalQuery
-        })
+            const qper = SELECT.from('CatalogService.QHPersonIdentity').where({ pid: position.PersonNumber })
+            const perres = await cds.run(qper)
+            const qperproqfl = SELECT.from('CatalogService.PersonProfleQualifications')
+                                     .where({ pid: position.PersonNumber,qualificationGroup: 'Registration' })
 
-		const personals = []
+            const perproqfl = await cds.run(qperproqfl)
+            const perproqflval = perproqfl[0]
 
-         if (Array.isArray(personal)){
-             personals = personal
-         }else {personals[0] = personal}
-		
+            if (perres && perres.length > 0) {
+                perres.forEach(async (person) => {
 
-		 const getExtensionData = personals.map(async (item) => {
-            const data = await SELECT.from(QHPosition).where({ PersonNumber: item.pid })
-            if (data[0]) {
-                item.custom = data[0].PersonnelAssignmentNumber
+                    const qperasn = SELECT.from('CatalogService.QHPersonnelAssignments').where({ PersonNumber: position.PersonNumber })
+                    const perasnres = await cds.run(qperasn)
+                    const perasnresval = perasnres[0]
+
+
+
+                    output.push({
+                        pid: position.PersonNumber, pan: position.PersonnelAssignmentNumber, name: perasnresval.FirstName,
+                        posname: perasnresval.PositionName, 
+                        ahpra: perproqflval.referenceNumber, expirydate: perproqflval.empQualifictionEnd,
+                        position: position.PositionNumber, work: person.workPhone, mobile: person.mobilePhone, email: person.email
+                    })
+                })
             } else {
-                item.custom = '12'
+                output.push({
+                    pid: position.PersonNumber, pan: position.PersonnelAssignmentNumber, name: perasnresval.FirstName,
+                    posname: perasnresval.PositionName, 
+                    ahpra: perproqflval.referenceNumber, expirydate: perproqflval.empQualifictionEnd,
+                    position: position.PositionNumber, work: person.workPhone, mobile: person.mobilePhone, email: person.email
+                })
             }
-            return item
+
         })
 
-        const personalsWithExtension = await Promise.all(getExtensionData)
-		return personalsWithExtension
-		
-	   
-	})
+        const PersonDataAll = await Promise.all(PersonData)
 
-})
+        return output
+
+    })
+
+
+
+    srv.on('READ', 'Employees', request => {
+        return res = EmpService.run(request.query)
+    })
+
+    srv.on('READ', 'QHPosition', async request => {
+        console.log(request.query)
+        return res = await QHService.run(request.query)
+    })
+
+}
 

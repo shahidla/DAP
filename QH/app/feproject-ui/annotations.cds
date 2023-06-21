@@ -1,56 +1,75 @@
 using CatalogService as service from '../../srv/catalog-service';
 
-annotate service.Employees with @(
+// New UI annotations
+annotate service.PersonSrv with @(
+    UI: {  SelectionFields: [name],
+    LineItem       : [
+        {Value: name},
+        {Value: email},
+        {Value: ahpra}
+    ],
+}) {
+    email @(title: 'Email');
+    name @(title: 'Name');
+    ahpra  @(title: 'AHPRA');
+};
+
+annotate service.PersonSrv with @(
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
                 $Type : 'UI.DataField',
                 Label : 'Pid',
-                Value : Pid,
+                Value : pid,
             },
             {
                 $Type : 'UI.DataField',
-                Value : Pfname,
+                Value : pan,
             },
             {
                 $Type : 'UI.DataField',
                 Label : 'Plname',
-                Value : Plname,
+                Value :  name,
             },
             {
                 $Type : 'UI.DataField',
-                Value : Phloc,
+                Value : position,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Pwphone',
-                Value : Pwphone,
+                Label : 'Position Name',
+                Value : posname,
             },
             {
                 $Type : 'UI.DataField',
                 Label : 'Pmphone',
-                Value : Pmphone,
+                Value : ahpra,
             },
             {
                 $Type : 'UI.DataField',
-                Value : Pemail,
+                Value : expirydate,
             },
             {
                 $Type : 'UI.DataField',
                 Label : 'Pstatus',
-                Value : Pstatus,
+                Value : work,
             },
             {
                 $Type : 'UI.DataField',
                 Label : 'Pareg',
-                Value : Pareg,
+                Value : work,
             },
             {
                 $Type : 'UI.DataField',
                 Label : 'Prstatus',
-                Value : Prstatus,
+                Value : mobile,
             },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Prstatus',
+                Value : email,
+            },            
         ],
     },
     UI.Facets : [
