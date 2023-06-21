@@ -16,7 +16,7 @@ entity PersonDataEnt {
     email    : String;
 
 
-}
+} 
 
 //@cds.persistence.exists
 entity Position    as projection on zhr_person_extn_srv.PositionSet {

@@ -8,30 +8,33 @@ module.exports = async srv => {
     const QHService = await cds.connect.to('zhr_person_extn_srv')
     const { QHPosition, QHPersonIdentity, QHPersonnelAssignments,PersonProfleQualifications } = QHService.entities('CatalogService')
     srv.on('READ', 'PersonSrv', async (req) => {
+        
         // // execute the query        
         const output = [];
-        const personals = []
-        const qpos = SELECT.from('CatalogService.QHPosition')
+        
+        const qpos = SELECT.from('CatalogService.QHPosition').orderBy({PersonNumber: "asc" });
         const posres = await cds.run(qpos)
 
         const PersonData = posres.map(async (position) => {
-
-            const qper = SELECT.from('CatalogService.QHPersonIdentity').where({ pid: position.PersonNumber })
+             
+            const qper = SELECT.from('CatalogService.QHPersonIdentity').where({ pid: position.PersonNumber }).orderBy({pid: "asc" });
             const perres = await cds.run(qper)
             const qperproqfl = SELECT.from('CatalogService.PersonProfleQualifications')
-                                     .where({ pid: position.PersonNumber,qualificationGroup: 'Registration' })
+                                     .where({ pid: position.PersonNumber,qualificationGroup: 'Registration' }).orderBy({pid: "asc" });
 
             const perproqfl = await cds.run(qperproqfl)
             const perproqflval = perproqfl[0]
 
+            const qperasn = SELECT.from('CatalogService.QHPersonnelAssignments').where({ PersonNumber: position.PersonNumber })
+            const perasnres = await cds.run(qperasn)
+            const perasnresval = perasnres[0]
+
             if (perres && perres.length > 0) {
-                perres.forEach(async (person) => {
-
-                    const qperasn = SELECT.from('CatalogService.QHPersonnelAssignments').where({ PersonNumber: position.PersonNumber })
-                    const perasnres = await cds.run(qperasn)
-                    const perasnresval = perasnres[0]
-
-
+                perres.forEach( (person) => {
+                    
+                    // const qperasn = SELECT.from('CatalogService.QHPersonnelAssignments').where({ PersonNumber: position.PersonNumber })
+                    // const perasnres = await cds.run(qperasn)
+                    // const perasnresval = perasnres[0]
 
                     output.push({
                         pid: position.PersonNumber, pan: position.PersonnelAssignmentNumber, name: perasnresval.FirstName,
@@ -48,11 +51,12 @@ module.exports = async srv => {
                     position: position.PositionNumber, work: person.workPhone, mobile: person.mobilePhone, email: person.email
                 })
             }
-
+           
+            
         })
 
         const PersonDataAll = await Promise.all(PersonData)
-
+        output.sort(function(a, b){return a.pid - b.pid});
         return output
 
     })
