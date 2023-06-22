@@ -31,9 +31,8 @@ annotate service.personDetail with @(
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
-            Label : 'person number',
+            Label : 'Person Number',
             Value : pid,
-            Criticality : pid,
         },
         {
             $Type : 'UI.DataField',
@@ -57,33 +56,33 @@ annotate service.personDetail with @(
         },
     ]
 );
-annotate service.personDetail with @(UI.LineItem: [
-    {
-        $Type: 'UI.DataField',
-        Label: 'person number',
-        Value: pid,
-    },
-    {
-        $Type: 'UI.DataField',
-        Label: 'pad',
-        Value: pad,
-    },
-    {
-        $Type: 'UI.DataField',
-        Label: 'name',
-        Value: name,
-    },
-    {
-        $Type: 'UI.DataField',
-        Label: 'position name',
-        Value: posname,
-    },
-    {
-        $Type: 'UI.DataField',
-        Label: 'ahpra',
-        Value: ahpra,
-    },
-]);
+// annotate service.personDetail with @(UI.LineItem: [
+//     {
+//         $Type: 'UI.DataField',
+//         Label: 'person number',
+//         Value: pid,
+//     },
+//     {
+//         $Type: 'UI.DataField',
+//         Label: 'pad',
+//         Value: pad,
+//     },
+//     {
+//         $Type: 'UI.DataField',
+//         Label: 'name',
+//         Value: name,
+//     },
+//     {
+//         $Type: 'UI.DataField',
+//         Label: 'position name',
+//         Value: posname,
+//     },
+//     {
+//         $Type: 'UI.DataField',
+//         Label: 'ahpra',
+//         Value: ahpra,
+//     },
+// ]);
 
 annotate service.personDetail with @(
     UI.FieldGroup #GeneratedGroup1: {

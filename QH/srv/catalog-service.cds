@@ -7,6 +7,7 @@ service CatalogService {
     //@requires: 'authenticated-user'
     @readonly
     entity PersonSrv                  as projection on my.PersonDataEnt;
+    entity PersonSrv2                  as projection on my.personDetail2;
 
     @readonly
     //@requires: 'authenticated-user'
