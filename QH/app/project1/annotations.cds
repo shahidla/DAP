@@ -143,3 +143,23 @@ annotate service.PersonSrv with @(
         TypeNamePlural : 'Tests',
     }
 );
+annotate service.PersonSrv with {
+    name @Common.Text : posname
+};
+annotate service.PersonSrv with {
+    name @Common.Label : 'posName'
+};
+annotate service.PersonSrv with {
+    name @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'personDetail',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : name,
+                    ValueListProperty : 'posname',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};

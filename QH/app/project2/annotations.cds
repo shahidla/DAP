@@ -1,5 +1,62 @@
 using CatalogService as service from '../../srv/catalog-service';
+using from '../uiproject/annotations';
 
+annotate service.personDetail with @(
+    UI.SelectionFields : [
+        name,
+        pid,
+    ]
+);
+annotate service.personDetail with {
+    pid @Common.Label : 'Personal Number'
+};
+annotate service.personDetail with {
+    name @Common.Label : 'Position Name'
+};
+annotate service.personDetail with {
+    pid @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'personDetail',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : pid,
+                    ValueListProperty : 'pid',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};
+annotate service.personDetail with @(
+    UI.LineItem : [
+        {
+            $Type : 'UI.DataField',
+            Label : 'person number',
+            Value : pid,
+            Criticality : pid,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Personnel Assignment Number',
+            Value : pad,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Full Name',
+            Value : name,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Position Name',
+            Value : posname,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'AHPRA Registration',
+            Value : ahpra,
+        },
+    ]
+);
 annotate service.personDetail with @(UI.LineItem: [
     {
         $Type: 'UI.DataField',
@@ -39,12 +96,12 @@ annotate service.personDetail with @(
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'pad',
+                Label: 'Personnel Assignment Number',
                 Value: pad,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'name',
+                Label: 'Full Name',
                 Value: name,
             },
 
@@ -55,17 +112,17 @@ annotate service.personDetail with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: 'position name',
+                Label: 'Position Name',
                 Value: posname,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'ahpra',
+                Label: 'AHPRA Registration',
                 Value: ahpra,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'expirydate',
+                Label: 'Expiry Date',
                 Value: expirydate,
             },
            
@@ -77,12 +134,12 @@ annotate service.personDetail with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: 'work',
+                Label: 'Work',
                 Value: work,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'position id',
+                Label: 'Position Id',
                 Value: position,
             },
         ],
@@ -93,12 +150,12 @@ annotate service.personDetail with @(
             
             {
                 $Type: 'UI.DataField',
-                Label: 'mobile',
+                Label: 'Mobile',
                 Value: mobile,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'email',
+                Label: 'Email',
                 Value: email,
             },
         ],
@@ -132,48 +189,3 @@ annotate service.personDetail with @(
         },
     ]
 );
-
-// annotate service.personDetail with @(UI.SelectionFields: [
-//     posname,
-//     pid,
-// ]);
-
-annotate service.personDetail with @(UI.HeaderInfo: {
-    $Type         : 'UI.HeaderInfoType',
-    TypeName      : 'Manage Digital Passports',
-    TypeNamePlural: 'Manage Digital Passports',
-    // Title         : {
-    //     $Type: 'UI.DataField',
-    //     Value: name,
-    // },
-    // Description   : {
-    //     $Type: 'UI.DataField',
-    //     Value: pid,
-    // },
-    TypeImageUrl  : 'REPLACE_WITH_TYPEIMAGE_PATH',
-    ImageUrl      : 'REPLACE_WITH_IMAGE_URL_PATH',
-});
-
-annotate service.personDetail with @(UI.DataPoint #test1: {
-    $Type      : 'UI.DataPointType',
-    Title      : 'position',
-    Value      : position,
-    Criticality: position,
-});
-annotate service.personDetail with {
-    name @Common.Label : 'posName'
-};
-annotate service.personDetail with {
-    name @(Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'personDetail',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : name,
-                    ValueListProperty : 'posname',
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true
-)};
