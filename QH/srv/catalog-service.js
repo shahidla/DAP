@@ -57,7 +57,8 @@ module.exports = async srv => {
 
         const PersonDataAll = await Promise.all(PersonData)
         output.sort(function(a, b){return a.pid - b.pid});
-        return output
+        output['$count'] = output.length
+        req.reply(output)
 
     })
 
@@ -69,7 +70,9 @@ module.exports = async srv => {
 
     srv.on('READ', 'QHPosition', async request => {
         console.log(request.query)
-        return res = await QHService.run(request.query)
+        res = await QHService.run(request.query)
+        console.log(res)
+        return res
     })
 
 }
