@@ -140,8 +140,8 @@ annotate service.personDetail with @(
 
 annotate service.personDetail with @(UI.HeaderInfo: {
     $Type         : 'UI.HeaderInfoType',
-    TypeName      : 'Manage Digital Passports',
-    TypeNamePlural: 'Manage Digital Passports',
+    TypeName      : 'Passports',
+    TypeNamePlural: 'Passports',
     // Title         : {
     //     $Type: 'UI.DataField',
     //     Value: name,
