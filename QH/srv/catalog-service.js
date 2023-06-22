@@ -7,11 +7,11 @@ module.exports = async srv => {
     const EmpService = await cds.connect.to('emp')
     const QHService = await cds.connect.to('zhr_person_extn_srv')
     const { QHPosition, QHPersonIdentity, QHPersonnelAssignments,PersonProfleQualifications } = QHService.entities('CatalogService')
-    srv.on('READ', 'PersonSrv', async (req) => {
+    srv.on('READ', 'PersonSrv', async (req,query) => {
         
         // // execute the query        
         const output = [];
-        
+        console.log(query)
         const qpos = SELECT.from('CatalogService.QHPosition').orderBy({PersonNumber: "asc" });
         const posres = await cds.run(qpos)
 

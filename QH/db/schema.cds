@@ -4,10 +4,10 @@ using {zhr_person_extn_srv} from '../srv/external/zhr_person_extn_srv';
 
 @cds.persistence.exists
 entity PersonDataEnt {
-    pid      : String;
-    pan      : String;
+    key pid      : String;
+    key pan      : String;
     name     : String;
-    position : String;
+    key position : String;
     posname  : String;
     ahpra    : String;
     expirydate  : String;
