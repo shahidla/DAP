@@ -137,3 +137,9 @@ annotate service.PersonSrv with @(
         fn : name,
     }
 );
+annotate service.PersonSrv with @(
+    UI.HeaderInfo : {
+        TypeName : 'Test',
+        TypeNamePlural : 'Tests',
+    }
+);
