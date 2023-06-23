@@ -100,16 +100,14 @@ annotate service.personDetail with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: 'Person number',
-                Value: pid,
+                Label: 'First Name',
+                Value: firstname,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'Personnel Assignment Number',
-                Value: pad,
-            },
-
-
+                Label: 'Last Name',
+                Value: lastname,
+            },                
         ],
     },
     UI.FieldGroup #GeneratedGroup2: {
@@ -117,14 +115,25 @@ annotate service.personDetail with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: 'Position Name',
-                Value: posname,
+                Label: 'Person Number',
+                Value: pid,
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'AHPRA Registration',
-                Value: ahpra,
+                Label: 'Personnel Assignment Number',
+                Value: pad,
             },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Position Id',
+                Value: position,
+            },            
+            {
+                $Type: 'UI.DataField',
+                Label: 'Position Name',
+                Value: posname,
+            },
+
 
 
         ],
@@ -132,22 +141,18 @@ annotate service.personDetail with @(
     UI.FieldGroup #GeneratedGroup3: {
         $Type: 'UI.FieldGroupType',
         Data : [
-            {
-                $Type: 'UI.DataField',
-                Label: 'Work',
-                Value: work,
-            },
-            {
-                $Type: 'UI.DataField',
-                Label: 'Position Id',
-                Value: position,
-            },
+
+
         ],
     },
     UI.FieldGroup #GeneratedGroup4: {
         $Type: 'UI.FieldGroupType',
         Data : [
-
+            {
+                $Type: 'UI.DataField',
+                Label: 'Work',
+                Value: work,
+            },
             {
                 $Type: 'UI.DataField',
                 Label: 'Mobile',
@@ -163,22 +168,17 @@ annotate service.personDetail with @(
     UI.FieldGroup #GeneratedGroup5: {
         $Type: 'UI.FieldGroupType',
         Data : [
-
+            {
+                $Type: 'UI.DataField',
+                Label: 'AHPRA Registration',
+                Value: ahpra,
+            },
             {
                 $Type: 'UI.DataField',
                 Label: 'Expiry Date',
                 Value: expirydate,
             },
-            {
-                $Type: 'UI.DataField',
-                Label: 'First Name',
-                Value: firstname,
-            },
-            {
-                $Type: 'UI.DataField',
-                Label: 'Last Name',
-                Value: lastname,
-            },            
+        
         ],
     },
     UI.FieldGroup #GeneratedGroup6: {
