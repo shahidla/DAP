@@ -21,6 +21,8 @@ service CatalogService {
     entity PersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet;
     entity Position                   as projection on zhr_person_extn_srv.PositionSet;
 
+
+@readonly
     entity personDetail               as
         select from zhr_person_extn_srv.PersonnelAssignmentsSet as PersonnelAssignments
         left join QHPersonIdentity

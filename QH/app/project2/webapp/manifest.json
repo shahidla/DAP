@@ -129,7 +129,7 @@
                                             "filter": true,
                                             "sort": true
                                         },
-                                        "selectionMode": "None",
+                                        "selectionMode": "Single",
                                         "enableExport": true
                                     }
                                 }
