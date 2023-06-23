@@ -230,3 +230,20 @@ annotate service.personDetail with @(
         ImageUrl : null,
     }
 );
+annotate service.personDetail with {
+    firstname @Common.Label : 'First Name'
+};
+annotate service.personDetail with {
+    firstname @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'personDetail',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : firstname,
+                    ValueListProperty : 'firstname',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};

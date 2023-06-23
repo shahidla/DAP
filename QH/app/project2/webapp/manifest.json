@@ -129,12 +129,8 @@
                                             "filter": true,
                                             "sort": true
                                         },
-                                        "selectionMode": "None"
-                                    },
-                                    "columns": {
-                                        "DataField::pid": {
-                                            "width": "AUTO"
-                                        }
+                                        "selectionMode": "None",
+                                        "enableExport": true
                                     }
                                 }
                             },
