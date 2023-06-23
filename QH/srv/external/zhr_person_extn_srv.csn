@@ -191,7 +191,7 @@
       "elements": {
         "PersonNumber": {
           "key": true,
-          "type": "cds.Integer64",
+          "type": "cds.String",
           "@sap.unicode": "false",
           "@sap.label": "Personnel No.",
           "@sap.creatable": "false",
@@ -270,7 +270,7 @@
       "elements": {
         "PersonNumber": {
           "key": true,
-          "type": "cds.Integer64",
+          "type": "cds.String",
           "@sap.unicode": "false",
           "@sap.label": "Personnel No.",
           "@sap.creatable": "false",

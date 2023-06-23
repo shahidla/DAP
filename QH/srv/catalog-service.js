@@ -2,16 +2,21 @@ const cds = require('@sap/cds');
 
 module.exports = async srv => {
 
-    // const { PersonSrv } = srv.entities
+    const { PersonSrv } = srv.entities
 
     const EmpService = await cds.connect.to('emp')
     const QHService = await cds.connect.to('zhr_person_extn_srv')
     const { QHPosition, QHPersonIdentity, QHPersonnelAssignments,PersonProfleQualifications } = QHService.entities('CatalogService')
-    srv.on('READ', 'PersonSrv', async (req,query) => {
+    srv.on('READ', 'PersonSrv', async (req) => {
         
         // // execute the query        
         const output = [];
-        console.log(query)
+        console.log(req.params)
+        if(req.params[0]){
+            const { pid, pan,position } = req.params[0];
+
+        }
+        
         const qpos = SELECT.from('CatalogService.QHPosition').orderBy({PersonNumber: "asc" });
         const posres = await cds.run(qpos)
 
@@ -57,6 +62,11 @@ module.exports = async srv => {
 
         const PersonDataAll = await Promise.all(PersonData)
         output.sort(function(a, b){return a.pid - b.pid});
+        if (req.params[0]){
+            console.log(output[0])
+            if(!output[0]) console.log('error')
+            return (output[0])
+        }
         output['$count'] = output.length
         req.reply(output)
 

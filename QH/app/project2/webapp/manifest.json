@@ -128,10 +128,17 @@
                                         "personalization": {
                                             "filter": true,
                                             "sort": true
+                                        },
+                                        "selectionMode": "None"
+                                    },
+                                    "columns": {
+                                        "DataField::pid": {
+                                            "width": "AUTO"
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": "Enabled"
                         }
                     }
                 },
@@ -142,7 +149,8 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "personDetail"
+                            "entitySet": "personDetail",
+                            "sectionLayout": "Tabs"
                         }
                     }
                 }

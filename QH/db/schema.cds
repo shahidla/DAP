@@ -3,7 +3,7 @@ namespace qh.employees;
 using {zhr_person_extn_srv} from '../srv/external/zhr_person_extn_srv';
 
 @cds.persistence.exists
-entity PersonDataEnt {
+entity PersonDataEnt @(odata.key){
     key pid        : String;
     key pan        : String;
         name       : String;

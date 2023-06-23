@@ -1,61 +1,66 @@
 using CatalogService as service from '../../srv/catalog-service';
 using from '../uiproject/annotations';
 
-annotate service.personDetail with @(
-    UI.SelectionFields : [
-        name,
-        pid,
-    ]
-);
+annotate service.personDetail with @(UI.SelectionFields: [
+    name,
+    pid,
+]);
+
 annotate service.personDetail with {
-    pid @Common.Label : 'Personal Number'
+    pid @Common.Label: 'Personal Number'
 };
+
 annotate service.personDetail with {
-    name @Common.Label : 'Position Name'
+    name @Common.Label: 'Position Name'
 };
+
 annotate service.personDetail with {
-    pid @(Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'personDetail',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : pid,
-                    ValueListProperty : 'pid',
-                },
-            ],
+    pid @(
+        Common.ValueList               : {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'personDetail',
+            Parameters    : [{
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: pid,
+                ValueListProperty: 'pid',
+            }, ],
         },
-        Common.ValueListWithFixedValues : true
-)};
-annotate service.personDetail with @(
-    UI.LineItem : [
-        {
-            $Type : 'UI.DataField',
-            Label : 'Person Number',
-            Value : pid,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'Personnel Assignment Number',
-            Value : pad,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'Full Name',
-            Value : name,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'Position Name',
-            Value : posname,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'AHPRA Registration',
-            Value : ahpra,
-        },
-    ]
-);
+        Common.ValueListWithFixedValues: true
+    )
+};
+
+annotate service.personDetail with @(UI.LineItem: [
+    {
+        $Type: 'UI.DataField',
+        Label: 'Person Number',
+        Value: pid,
+    },
+    {
+        $Type: 'UI.DataField',
+        Label: 'Personnel Assignment Number',
+        Value: pad,
+    },
+    {
+        $Type: 'UI.DataField',
+        Label: 'Full Name',
+        Value: name,
+    },
+    {
+        $Type: 'UI.DataField',
+        Label: 'Position Name',
+        Value: posname,
+    },
+    {
+        $Type: 'UI.DataField',
+        Label: 'AHPRA Registration',
+        Value: ahpra,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: mobile,
+        Label: 'Mobile',
+    },
+]);
 // annotate service.personDetail with @(UI.LineItem: [
 //     {
 //         $Type: 'UI.DataField',
@@ -98,11 +103,7 @@ annotate service.personDetail with @(
                 Label: 'Personnel Assignment Number',
                 Value: pad,
             },
-            {
-                $Type: 'UI.DataField',
-                Label: 'Full Name',
-                Value: name,
-            },
+
 
         ],
     },
@@ -119,12 +120,7 @@ annotate service.personDetail with @(
                 Label: 'AHPRA Registration',
                 Value: ahpra,
             },
-            {
-                $Type: 'UI.DataField',
-                Label: 'Expiry Date',
-                Value: expirydate,
-            },
-           
+
 
         ],
     },
@@ -143,10 +139,10 @@ annotate service.personDetail with @(
             },
         ],
     },
-     UI.FieldGroup #GeneratedGroup4: {
+    UI.FieldGroup #GeneratedGroup4: {
         $Type: 'UI.FieldGroupType',
         Data : [
-            
+
             {
                 $Type: 'UI.DataField',
                 Label: 'Mobile',
@@ -159,11 +155,33 @@ annotate service.personDetail with @(
             },
         ],
     },
+    UI.FieldGroup #GeneratedGroup5: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+
+            {
+                $Type: 'UI.DataField',
+                Label: 'Expiry Date',
+                Value: expirydate,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Full Name',
+                Value: name,
+            },
+        ],
+    },
+    UI.FieldGroup #GeneratedGroup6: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+
+
+        ],
+    },
     UI.Facets                     : [{
         $Type : 'UI.ReferenceFacet',
-        ID    : 'GeneratedFacet4',
-        Label : 'Passport Details',
-        Target: '@UI.FieldGroup#GeneratedGroup3',
+        Label : 'Passport Stamps',
+        Target: '@UI.FieldGroup#GeneratedGroup6',
     }],
     UI.HeaderFacets               : [
         {
@@ -181,10 +199,24 @@ annotate service.personDetail with @(
             ID    : 'GeneratedFacet3',
             Target: '@UI.FieldGroup#GeneratedGroup3',
         },
-         {
+        {
             $Type : 'UI.ReferenceFacet',
             ID    : 'GeneratedFacet4',
             Target: '@UI.FieldGroup#GeneratedGroup4',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'GeneratedFacet5',
+            Target: '@UI.FieldGroup#GeneratedGroup5',
+        },
     ]
+);
+annotate service.personDetail with @(
+    UI.HeaderInfo : {
+        $Type : 'UI.HeaderInfoType',
+        TypeName : 'Passports',
+        TypeNamePlural : 'Passports',
+        TypeImageUrl : '',
+        ImageUrl : null,
+    }
 );

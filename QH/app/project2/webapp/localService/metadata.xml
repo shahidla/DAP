@@ -83,7 +83,7 @@
                     <PropertyRef Name="PersonNumber"/>
                     <PropertyRef Name="PersonnelAssignmentNumber"/>
                 </Key>
-                <Property Name="PersonNumber" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="PersonNumber" Type="Edm.String" Nullable="false"/>
                 <Property Name="PersonnelAssignmentNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
                 <Property Name="FirstName" Type="Edm.String" MaxLength="85" Nullable="false"/>
                 <Property Name="WorkingHours" Type="Edm.Decimal" Scale="2" Precision="5" Nullable="false"/>
