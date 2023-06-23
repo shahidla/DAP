@@ -2,7 +2,7 @@ using CatalogService as service from '../../srv/catalog-service';
 using from '../uiproject/annotations';
 
 annotate service.personDetail with @(UI.SelectionFields: [
-    name,
+    firstname,
     pid,
 ]);
 
@@ -11,7 +11,7 @@ annotate service.personDetail with {
 };
 
 annotate service.personDetail with {
-    name @Common.Label: 'Position Name'
+    posname @Common.Label: 'Position Name'
 };
 
 annotate service.personDetail with {
@@ -42,9 +42,14 @@ annotate service.personDetail with @(UI.LineItem: [
     },
     {
         $Type: 'UI.DataField',
-        Label: 'Full Name',
-        Value: name,
+        Label: 'First Name',
+        Value: firstname,
     },
+    {
+        $Type: 'UI.DataField',
+        Label: 'Last Name',
+        Value: lastname,
+    },    
     {
         $Type: 'UI.DataField',
         Label: 'Position Name',
@@ -95,7 +100,7 @@ annotate service.personDetail with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: 'person number',
+                Label: 'Person number',
                 Value: pid,
             },
             {
@@ -166,9 +171,14 @@ annotate service.personDetail with @(
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'Full Name',
-                Value: name,
+                Label: 'First Name',
+                Value: firstname,
             },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Last Name',
+                Value: lastname,
+            },            
         ],
     },
     UI.FieldGroup #GeneratedGroup6: {
