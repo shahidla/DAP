@@ -28,7 +28,8 @@
     "watch-project2": "cds watch --open project2/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-project3": "cds watch --open project3/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-qhfiori": "cds watch --open qhfiori/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-qhproject": "cds watch --open qhproject/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-qhproject": "cds watch --open qhproject/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-project": "cds watch --open project/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -59,6 +60,8 @@
     "app/project2",
     "app/project3",
     "app/qhfiori",
-    "app/qhproject"
+    "app/qhproject",
+    "app/qhfiori",
+    "app/project"
   ]
 }

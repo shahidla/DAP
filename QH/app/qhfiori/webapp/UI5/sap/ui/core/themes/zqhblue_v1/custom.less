@@ -1,0 +1,135 @@
+/**
+* Copyright (c) 2012-2020 SAP SE or an SAP affiliate company. All rights reserved.
+* Theming Engine 1.70.1
+* data:{"mVersionDependency":{"Base.baseLib.baseTheme":"11.1.41","Base.baseLib":"11.1.41","Base":"11.1.41","Base.baseLib.sap_base_fiori":"11.1.41","Base.baseLib.sap_fiori_3":"11.1.41","UI5.sap/ui/core.base":"1.96.12","UI5.sap/ui/core":"1.96.12","UI5":"1.96.14","UI5.sap/ui/core.sap_fiori_3":"1.96.12"},"sModified":"2023-01-31T05:44:58Z"}
+*/
+
+@import "../../../../../../Base/baseLib/baseTheme/base.less";
+@import "../../../../../../Base/baseLib/sap_base_fiori/base.less";
+@import "../../../../../../Base/baseLib/sap_fiori_3/base.less";
+@import "../../../../../../Base/baseLib/zqhblue_v1/base.less";
+@import "../base/global.less";
+@import "../sap_fiori_3/global.less";
+
+/******************* FILE /UI5/sap/ui/core/themes/zqhblue_v1/custom.less (Version 1.96.12) *******************/
+
+/*<SAP_FREETEXT_LESS>*/.sapMBarTitleAlignAuto .sapMBarPH {
+    justify-content: center;
+}  
+/*
+* === Disable Share button on all apps ===
+*/
+button[id$="shareButton"] {
+    display : none;
+}
+button[title="Share"] {
+    display : none;
+}
+
+/*
+* --- Shell action button - more text space---
+*/
+.sapUshellActionItem .sapMBtnContent {
+	height: 3rem;
+}
+/*
+* --- User Activities Settings ---
+* Wrap text on mobile devices
+*/
+#userActivitiesSetting--enableTrackingCheckbox-label-bdi {
+    white-space: normal;
+    display: inline-block;
+    line-height: 1.5em;
+}
+
+/*
+* --- Disabled text areas on mobile devices (ALM 7795) ---
+*/
+input:disabled, textarea:disabled {
+    opacity: unset; 
+}
+
+
+/*
+* === Search - FAQ entries ===
+* Adjustments to search tool for FAQ entries.
+* May need to be further restricted if other 
+* search content is to be returned.
+*/
+.sapUshellSearchResultListItem-GenericAttribute:first-child {
+	width: 90%;
+	height: auto;
+	overflow: visible;
+}
+
+.sapUshellSearchResultListItem-Title {
+    opacity: 0.6;
+}
+
+.sapUshellSearchResultListItem-AttributeKey, .sapUshellSearchResultListItem-AttributeValue {
+	overflow: visible;
+	white-space: normal;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+.sapUshellSearchResultListItem-AttributesExpandContainer {
+	height: inherit;
+}
+
+.sapUshellSearchResultListItem-Title {
+	white-space: normal;
+}
+
+/*
+* === News Feed ===
+* Adjustments to news feed for responsiveness
+* Text should not occupy less than 40% of width of page
+*/
+.newsDetail .sapSuiteUiCommonsFeedItemHeaderText {
+	min-width: 40%;
+	width: auto;
+	height: auto;
+	overflow: auto;
+	padding-bottom: 15px;
+}
+
+/*
+* === Date Picker Adjustments ===
+*/
+/*
+* --- turn off week number ---
+*/
+.sapUiCalWeekNum[role=rowheader] {
+    visibility: hidden;
+    width: 12.5%;
+    display: block;
+}
+
+/*
+* === Tean calendar colours ===
+*/
+/*
+* --- Vacinations ---
+*/
+.sapUIMeLegendColor.sapUIMeLegendColorForType07 {
+  background-color: #d998cb
+}
+.sapMeOverlapCalendarDay.sapMeOverlapCalendarType07 {
+  background-color: #d998cb
+}
+/*
+* --- tasks ---
+*/
+.sapUIMeLegendColor.sapUIMeLegendColorForType04 {
+  background-color: #93b9c6
+}
+.sapMeOverlapCalendarDay.sapMeOverlapCalendarType04 {
+  background-color: #93b9c6
+}
+/*
+* --- Today border ---
+*/
+.sapMeCalendarApproval > .sapMeCalendarMonth > div.sapMeCalendarMonthDays > .sapMeCalendarMonthDay.sapMeCalendarDayNow::before {
+	border: 0.125rem solid #007cc0;
+}/*</SAP_FREETEXT_LESS>*/

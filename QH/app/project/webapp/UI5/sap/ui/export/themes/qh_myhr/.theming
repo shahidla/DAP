@@ -1,0 +1,15 @@
+{
+	"mVersionDependency": {
+		"UI5.sap/ui/export.sap_fiori_3": "1.115.0",
+		"UI5.sap/ui/export": "1.115.0",
+		"UI5": "1.115.0"
+	},
+	"sEntity": "Theme",
+	"sId": "qh_myhr",
+	"sLabel": "myHR Theme",
+	"oExtends": "UI5.sap/ui/export.sap_fiori_3",
+	"sTextDirections": "LTR",
+	"sType": "STANDARD",
+	"sThemability": "PUBLIC",
+	"sReleaseStage": "GENERAL_AVAILABILITY"
+}

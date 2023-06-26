@@ -1,0 +1,32 @@
+{
+	"mVersionDependency": {
+		"UR.baseLib.sap_fiori_3": "10.30.7.351564.0",
+		"UR.baseLib": "10.30.7.351564.0",
+		"UR": "10.30.7.351564.0"
+	},
+	"sEntity": "Theme",
+	"sId": "qh_myhr",
+	"sLabel": "myHR Theme",
+	"oExtends": "UR.baseLib.sap_fiori_3",
+	"aBuildFiles": [
+		"standards",
+		"standards_cozy",
+		"standards_condensed",
+		"standards_fioripaddings",
+		"standards_regular",
+		"SAP-icons"
+	],
+	"aFiles": [
+		"base",
+		"standards",
+		"standards_cozy",
+		"standards_condensed",
+		"standards_fioripaddings",
+		"standards_regular",
+		"SAP-icons"
+	],
+	"sTextDirections": "LTR",
+	"sType": "STANDARD",
+	"sThemability": "PUBLIC",
+	"sReleaseStage": "GENERAL_AVAILABILITY"
+}
