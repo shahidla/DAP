@@ -3,41 +3,59 @@
     <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
         <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
-        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
-    </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
             <EntityContainer Name="EntityContainer">
                 <EntitySet Name="PersonSrv" EntityType="CatalogService.PersonSrv"/>
+                <EntitySet Name="PersonSrv2" EntityType="CatalogService.PersonSrv2"/>
                 <EntitySet Name="Employees" EntityType="CatalogService.Employees"/>
                 <EntitySet Name="QHPosition" EntityType="CatalogService.QHPosition"/>
                 <EntitySet Name="QHPersonIdentity" EntityType="CatalogService.QHPersonIdentity"/>
                 <EntitySet Name="QHPersonnelAssignments" EntityType="CatalogService.QHPersonnelAssignments">
                     <NavigationPropertyBinding Path="PositionNavn" Target="QHPosition"/>
-                    <NavigationPropertyBinding Path="PersonProfleQualificationsSet" Target="PersonProfleQualifications"/>
+                    <NavigationPropertyBinding Path="PersonProfleQualificationsSet" Target="QHPersonProfleQualifications"/>
                 </EntitySet>
-                <EntitySet Name="PersonProfileContact" EntityType="CatalogService.PersonProfileContact"/>
-                <EntitySet Name="PersonProfleQualifications" EntityType="CatalogService.PersonProfleQualifications"/>
-                <EntitySet Name="Position" EntityType="CatalogService.Position"/>
-                <EntitySet Name="personDetail" EntityType="CatalogService.personDetail"/>
-                <EntitySet Name="PersonProfileTask" EntityType="CatalogService.PersonProfileTask"/>
-                <EntitySet Name="personItems" EntityType="CatalogService.personItems"/>
+                <EntitySet Name="QHPersonProfileContact" EntityType="CatalogService.QHPersonProfileContact"/>
+                <EntitySet Name="QHPersonProfleQualifications" EntityType="CatalogService.QHPersonProfleQualifications"/>
+                <EntitySet Name="QHPerson" EntityType="CatalogService.QHPerson">
+                    <NavigationPropertyBinding Path="PersonnelAssignmentsNavn" Target="QHPersonnelAssignments"/>
+                    <NavigationPropertyBinding Path="PersonProfileContactSet" Target="QHPersonProfileContact"/>
+                    <NavigationPropertyBinding Path="PersonIdentity" Target="QHPersonIdentity"/>
+                </EntitySet>
             </EntityContainer>
             <EntityType Name="PersonSrv">
-                <Property Name="pid" Type="Edm.String"/>
-                <Property Name="pan" Type="Edm.String"/>
+                <Key>
+                    <PropertyRef Name="pid"/>
+                    <PropertyRef Name="pan"/>
+                    <PropertyRef Name="position"/>
+                </Key>
+                <Property Name="pid" Type="Edm.String" Nullable="false"/>
+                <Property Name="pan" Type="Edm.String" Nullable="false"/>
                 <Property Name="name" Type="Edm.String"/>
-                <Property Name="position" Type="Edm.String"/>
+                <Property Name="position" Type="Edm.String" Nullable="false"/>
                 <Property Name="posname" Type="Edm.String"/>
                 <Property Name="ahpra" Type="Edm.String"/>
                 <Property Name="expirydate" Type="Edm.String"/>
                 <Property Name="work" Type="Edm.String"/>
                 <Property Name="mobile" Type="Edm.String"/>
                 <Property Name="email" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="PersonSrv2">
+                <Key>
+                    <PropertyRef Name="pid"/>
+                    <PropertyRef Name="pad"/>
+                    <PropertyRef Name="position"/>
+                </Key>
+                <Property Name="pid" Type="Edm.String" Nullable="false"/>
+                <Property Name="pad" Type="Edm.String" MaxLength="8" Nullable="false"/>
+                <Property Name="position" Type="Edm.String" MaxLength="8" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="85" Nullable="false"/>
+                <Property Name="posname" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="ahpra" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="expirydate" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="work" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="mobile" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="email" Type="Edm.String" MaxLength="80" Nullable="false"/>
             </EntityType>
             <EntityType Name="Employees">
                 <Key>
@@ -60,7 +78,7 @@
                     <PropertyRef Name="PersonnelAssignmentNumber"/>
                     <PropertyRef Name="PositionNumber"/>
                 </Key>
-                <Property Name="PersonNumber" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="PersonNumber" Type="Edm.String" Nullable="false"/>
                 <Property Name="PersonnelAssignmentNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
                 <Property Name="PositionNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
                 <Property Name="PositionName" Type="Edm.String" MaxLength="40" Nullable="false"/>
@@ -84,7 +102,7 @@
                     <PropertyRef Name="PersonNumber"/>
                     <PropertyRef Name="PersonnelAssignmentNumber"/>
                 </Key>
-                <Property Name="PersonNumber" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="PersonNumber" Type="Edm.String" Nullable="false"/>
                 <Property Name="PersonnelAssignmentNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
                 <Property Name="FirstName" Type="Edm.String" MaxLength="85" Nullable="false"/>
                 <Property Name="WorkingHours" Type="Edm.Decimal" Scale="2" Precision="5" Nullable="false"/>
@@ -103,9 +121,9 @@
                 <Property Name="MovementTypeCode" Type="Edm.String" MaxLength="2" Nullable="false"/>
                 <Property Name="Appname" Type="Edm.String" MaxLength="10" Nullable="false"/>
                 <NavigationProperty Name="PositionNavn" Type="Collection(CatalogService.QHPosition)"/>
-                <NavigationProperty Name="PersonProfleQualificationsSet" Type="Collection(CatalogService.PersonProfleQualifications)"/>
+                <NavigationProperty Name="PersonProfleQualificationsSet" Type="Collection(CatalogService.QHPersonProfleQualifications)"/>
             </EntityType>
-            <EntityType Name="PersonProfileContact">
+            <EntityType Name="QHPersonProfileContact">
                 <Key>
                     <PropertyRef Name="pid"/>
                     <PropertyRef Name="subtype"/>
@@ -123,7 +141,7 @@
                 <Property Name="workPhone" Type="Edm.String" MaxLength="20"/>
                 <Property Name="mobilePhone" Type="Edm.String" MaxLength="20"/>
             </EntityType>
-            <EntityType Name="PersonProfleQualifications">
+            <EntityType Name="QHPersonProfleQualifications">
                 <Key>
                     <PropertyRef Name="pid"/>
                     <PropertyRef Name="pan"/>
@@ -142,41 +160,17 @@
                 <Property Name="empQualifictionEnd" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="referenceNumber" Type="Edm.String" MaxLength="20" Nullable="false"/>
             </EntityType>
-            <EntityType Name="Position">
-                <Key>
-                    <PropertyRef Name="PersonNumber"/>
-                    <PropertyRef Name="PersonnelAssignmentNumber"/>
-                    <PropertyRef Name="PositionNumber"/>
-                </Key>
-                <Property Name="PersonNumber" Type="Edm.Int64" Nullable="false"/>
-                <Property Name="PersonnelAssignmentNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
-                <Property Name="PositionNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
-                <Property Name="PositionName" Type="Edm.String" MaxLength="40" Nullable="false"/>
-                <Property Name="OrganisationalUnitNumber" Type="Edm.String" MaxLength="8" Nullable="false"/>
-                <Property Name="OrganisationalUnitName" Type="Edm.String" MaxLength="40" Nullable="false"/>
-            </EntityType>
-            <EntityType Name="personDetail">
-                <Property Name="pid" Type="Edm.Int64" Nullable="false"/>
-                <Property Name="pad" Type="Edm.String" MaxLength="8" Nullable="false"/>
-                <Property Name="name" Type="Edm.String" MaxLength="85" Nullable="false"/>
-                <Property Name="posname" Type="Edm.String" MaxLength="40" Nullable="false"/>
-                <Property Name="ahpra" Type="Edm.String" MaxLength="20" Nullable="false"/>
-                <Property Name="expirydate" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="position" Type="Edm.String" MaxLength="8" Nullable="false"/>
-                <Property Name="work" Type="Edm.String" MaxLength="20" Nullable="false"/>
-                <Property Name="mobile" Type="Edm.String" MaxLength="20" Nullable="false"/>
-                <Property Name="email" Type="Edm.String" MaxLength="80" Nullable="false"/>
-            </EntityType>
-            <EntityType Name="PersonProfileTask">
-                <Property Name="due" Type="Edm.DateTimeOffset" Nullable="false"/>
-                <Property Name="positionId" Type="Edm.String" MaxLength="8" Nullable="false"/>
-            </EntityType>
-            <EntityType Name="personItems">
+            <EntityType Name="QHPerson">
                 <Key>
                     <PropertyRef Name="PersonNumber"/>
                 </Key>
                 <Property Name="PersonNumber" Type="Edm.Int64" Nullable="false"/>
                 <Property Name="PersonName" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <NavigationProperty Name="PersonnelAssignmentsNavn" Type="Collection(CatalogService.QHPersonnelAssignments)"/>
+                <NavigationProperty Name="PersonProfileContactSet" Type="Collection(CatalogService.QHPersonProfileContact)"/>
+                <NavigationProperty Name="PersonIdentity" Type="CatalogService.QHPersonIdentity">
+                    <ReferentialConstraint Property="PersonNumber" ReferencedProperty="pid"/>
+                </NavigationProperty>
             </EntityType>
             <Annotations Target="CatalogService.EntityContainer/PersonSrv">
                 <Annotation Term="Capabilities.DeleteRestrictions">
@@ -196,23 +190,6 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="CatalogService.EntityContainer/Employees">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="CatalogService.EntityContainer/personItems">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record Type="Capabilities.DeleteRestrictionsType">
                         <PropertyValue Property="Deletable" Bool="false"/>

@@ -8,8 +8,8 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
         <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/zhr-person-extn-srv/$metadata">
-        <edmx:Include Namespace="zhr_person_extn_srv"/>
+    <edmx:Reference Uri="/catalog/$metadata">
+        <edmx:Include Namespace="CatalogService"/>
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">

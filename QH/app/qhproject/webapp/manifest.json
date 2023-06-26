@@ -1,7 +1,7 @@
 {
   "_version": "1.40.0",
   "sap.app": {
-    "id": "project3",
+    "id": "qhproject",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,11 +13,11 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.7.1",
-      "toolsId": "0f0a2b40-908f-46e6-85a3-b4a339caab5f"
+      "toolsId": "1a6c42a5-4713-42d1-8002-e213c61a477f"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/zhr-person-extn-srv/",
+        "uri": "/catalog/",
         "type": "OData",
         "settings": {
           "annotations": [
@@ -71,7 +71,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project3.i18n.i18n"
+          "bundleName": "qhproject.i18n.i18n"
         }
       },
       "": {
@@ -97,65 +97,65 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "PersonnelAssignmentsSetList",
-          "target": "PersonnelAssignmentsSetList"
+          "name": "QHPersonList",
+          "target": "QHPersonList"
         },
         {
-          "pattern": "PersonnelAssignmentsSet({key}):?query:",
-          "name": "PersonnelAssignmentsSetObjectPage",
-          "target": "PersonnelAssignmentsSetObjectPage"
+          "pattern": "QHPerson({key}):?query:",
+          "name": "QHPersonObjectPage",
+          "target": "QHPersonObjectPage"
         },
         {
-          "pattern": "PersonnelAssignmentsSet({key})/PersonProfleQualificationsSet({key2}):?query:",
-          "name": "PersonProfleQualificationsSetObjectPage",
-          "target": "PersonProfleQualificationsSetObjectPage"
+          "pattern": "QHPerson({key})/PersonnelAssignmentsNavn({key2}):?query:",
+          "name": "QHPersonnelAssignmentsObjectPage",
+          "target": "QHPersonnelAssignmentsObjectPage"
         }
       ],
       "targets": {
-        "PersonnelAssignmentsSetList": {
+        "QHPersonList": {
           "type": "Component",
-          "id": "PersonnelAssignmentsSetList",
+          "id": "QHPersonList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "PersonnelAssignmentsSet",
+              "entitySet": "QHPerson",
               "variantManagement": "Page",
               "navigation": {
-                "PersonnelAssignmentsSet": {
+                "QHPerson": {
                   "detail": {
-                    "route": "PersonnelAssignmentsSetObjectPage"
+                    "route": "QHPersonObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "PersonnelAssignmentsSetObjectPage": {
+        "QHPersonObjectPage": {
           "type": "Component",
-          "id": "PersonnelAssignmentsSetObjectPage",
+          "id": "QHPersonObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "entitySet": "PersonnelAssignmentsSet",
+              "entitySet": "QHPerson",
               "navigation": {
-                "PersonProfleQualificationsSet": {
+                "PersonnelAssignmentsNavn": {
                   "detail": {
-                    "route": "PersonProfleQualificationsSetObjectPage"
+                    "route": "QHPersonnelAssignmentsObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "PersonProfleQualificationsSetObjectPage": {
+        "QHPersonnelAssignmentsObjectPage": {
           "type": "Component",
-          "id": "PersonProfleQualificationsSetObjectPage",
+          "id": "QHPersonnelAssignmentsObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "entitySet": "PersonProfleQualificationsSet"
+              "entitySet": "QHPersonnelAssignments"
             }
           }
         }
