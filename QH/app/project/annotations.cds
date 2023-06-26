@@ -43,19 +43,19 @@ annotate service.QHPersonnelAssignments with @(
             {
                 $Type : 'UI.DataField',
                 Value : FirstName,
-                Label : 'FirstName',
+                Label : 'First Name',
             },{
                 $Type : 'UI.DataField',
                 Value : LastName,
-                Label : 'LastName',
+                Label : 'Last Name',
             },{
                 $Type : 'UI.DataField',
                 Value : PersonnelAssignmentNumber,
-                Label : 'PersonnelAssignmentNumber',
+                Label : 'Personnel Assignment Number',
             },{
                 $Type : 'UI.DataField',
                 Value : PersonNumber,
-                Label : 'PersonNumber',
+                Label : 'Person ID',
             },],
     }
 );
@@ -107,32 +107,36 @@ annotate service.QHPersonProfleQualifications with @(
     UI.LineItem #StampData : [
         {
             $Type : 'UI.DataField',
-            Value : pid,
-            Label : 'pid',
-        },{
-            $Type : 'UI.DataField',
             Value : pan,
-            Label : 'pan',
-        },{
+            Label : 'Personnel Assignment Number',
+        },
+        {
             $Type : 'UI.DataField',
             Value : positionId,
-            Label : 'positionId',
-        },{
+            Label : 'Position ID',
+        },
+        {
             $Type : 'UI.DataField',
             Value : qualificationGroup,
-            Label : 'qualificationGroup',
+            Label : 'Stamp Type',
         },{
             $Type : 'UI.DataField',
             Value : qualificationName,
-            Label : 'qualificationName',
+            Label : 'Stamp Name',
         },{
             $Type : 'UI.DataField',
             Value : referenceNumber,
-            Label : 'referenceNumber',
-        },{
+            Label : 'Reference',
+        },
+        {
             $Type : 'UI.DataField',
-            Value : requiringPositionTitle,
-            Label : 'requiringPositionTitle',
+            Value : positionRequirementStart,
+            Label : 'Last Checked',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : positionRequirementEnd,
+            Label : 'Validity End',
         },]
 );
 annotate service.QHPersonnelAssignments with @(
@@ -141,16 +145,56 @@ annotate service.QHPersonnelAssignments with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : ProContact.relationship,
-                Label : 'relationship',
+                Value : PerIdentity.email,
+                Label : 'Email',
             },{
                 $Type : 'UI.DataField',
-                Value : ProContact.street,
-                Label : 'street',
+                Value : PerIdentity.mobilePhone,
+                Label : 'Mobile Phone',
             },{
                 $Type : 'UI.DataField',
-                Value : ProContact.workPhone,
-                Label : 'workPhone',
+                Value : PerIdentity.workPhone,
+                Label : 'Work Phone',
             },],
     }
 );
+annotate service.QHPersonnelAssignments with @(
+    UI.SelectionFields : [
+        PersonFullName,
+        PersonNumber,
+    ]
+);
+annotate service.QHPersonnelAssignments with {
+    PersonFullName @Common.Label : 'Full Name'
+};
+annotate service.QHPersonnelAssignments with {
+    PersonNumber @Common.Label : 'Person ID'
+};
+annotate service.QHPersonnelAssignments with {
+    PersonFullName @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'QHPersonnelAssignments',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : PersonFullName,
+                    ValueListProperty : 'PersonFullName',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};
+annotate service.QHPersonnelAssignments with {
+    PersonNumber @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'QHPersonnelAssignments',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : PersonNumber,
+                    ValueListProperty : 'PersonNumber',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};
