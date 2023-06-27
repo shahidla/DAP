@@ -190,6 +190,7 @@ annotate service.QHPersonnelAssignments with @(
         PersonFullName,
         PersonNumber,
         PersonnelAssignmentNumber,
+        PersonProfleQualificationsSet.referenceNumber
     ]
 );
 annotate service.QHPersonnelAssignments with {
@@ -198,6 +199,7 @@ annotate service.QHPersonnelAssignments with {
 annotate service.QHPersonnelAssignments with {
     PersonNumber @Common.Label : 'Person ID'
 };
+
 annotate service.QHPersonnelAssignments with {
     PersonFullName @(Common.ValueList : {
             $Type : 'Common.ValueListType',
