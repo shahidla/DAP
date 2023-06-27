@@ -107,7 +107,7 @@ annotate service.QHPersonnelAssignments with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : 'Rigistration',
+            Label : 'Rigistration Data',
             ID : 'Rigistration',
             Target : 'ReProfile/@UI.LineItem#Rigistration',
         },
@@ -331,27 +331,27 @@ annotate service.QHRePerProQualifications with @(
         {
             $Type : 'UI.DataField',
             Value : pid,
-            Label : 'pid',
+            Label : 'Pesonl ID',
         },{
             $Type : 'UI.DataField',
             Value : pan,
-            Label : 'pan',
+            Label : 'Personnel Assignment Number',
         },{
             $Type : 'UI.DataField',
             Value : positionId,
-            Label : 'positionId',
+            Label : 'Position ID',
         },{
             $Type : 'UI.DataField',
             Value : qualificationGroup,
-            Label : 'qualificationGroup',
+            Label : 'Stamp Type',
         },{
             $Type : 'UI.DataField',
             Value : qualificationName,
-            Label : 'qualificationName',
+            Label : 'Stamp Name',
         },{
             $Type : 'UI.DataField',
             Value : referenceNumber,
-            Label : 'referenceNumber',
+            Label : 'Reference',
         },{
             $Type : 'UI.DataField',
             Value : requiringPositionTitle,
