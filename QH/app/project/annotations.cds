@@ -82,7 +82,13 @@ annotate service.QHPersonnelAssignments with @(
                 $Type : 'UI.DataField',
                 Value : LastName,
                 Label : 'Last Name',
-            },],
+            },
+            {
+                $Type : 'UI.DataFieldForAnnotation',
+                Target: '@Communication.Contact',
+                Label : 'Contact'
+            }  
+            ],
     }
 );
 annotate service.QHPersonnelAssignments with @(
@@ -101,6 +107,26 @@ annotate service.QHPersonnelAssignments with @(
         },
     ]
 );
+
+annotate service.QHPersonnelAssignments with @(Communication.Contact : {
+
+    fn   : PersonFullName,
+    kind   : #individual,
+    tel: 
+    [{type :  #cell,
+      uri  : ProContact.mobilePhone },
+     {type :  #work,
+      uri  : ProContact.workPhone }
+      
+      ],
+
+    email  : [{
+        address : ProContact.email,
+        type    : #work
+    }]
+ 
+  });
+
 annotate service.QHPosition with @(
     UI.LineItem #OrgData : [
         {
@@ -166,25 +192,27 @@ annotate service.QHPersonProfleQualifications with @(
             Label : 'Validity End',
         },]
 );
-annotate service.QHPersonnelAssignments with @(
-    UI.FieldGroup #Contact : {
-        $Type : 'UI.FieldGroupType',
-        Data : [
-            {
-                $Type : 'UI.DataField',
-                Value : PerIdentity.email,
-                Label : 'Email',
-            },{
-                $Type : 'UI.DataField',
-                Value : PerIdentity.mobilePhone,
-                Label : 'Mobile Phone',
-            },{
-                $Type : 'UI.DataField',
-                Value : PerIdentity.workPhone,
-                Label : 'Work Phone',
-            },],
-    }
-);
+
+// annotate service.QHPersonnelAssignments with @(
+//     UI.FieldGroup #Contact : {
+//         $Type : 'UI.FieldGroupType',
+//         Data : [
+//             {
+//                 $Type : 'UI.DataField',
+//                 Value : PerIdentity.email,
+//                 Label : 'Email',
+//             },{
+//                 $Type : 'UI.DataField',
+//                 Value : PerIdentity.mobilePhone,
+//                 Label : 'Mobile Phone',
+//             },{
+//                 $Type : 'UI.DataField',
+//                 Value : PerIdentity.workPhone,
+//                 Label : 'Work Phone',
+//             },],
+//     }
+// );
+
 annotate service.QHPersonnelAssignments with @(
     UI.SelectionFields : [
         PersonFullName,

@@ -1,5 +1,6 @@
 using {emp} from './external/emp';
 using {zhr_person_extn_srv} from './external/zhr_person_extn_srv';
+using { empqfl } from './external/empqfl';
 
 service CatalogService {
     entity QHPosition                   as projection on zhr_person_extn_srv.PositionSet;
@@ -26,5 +27,16 @@ service CatalogService {
     };
 
     entity QHPersonProfileContact       as projection on zhr_person_extn_srv.PersonProfileContactSet;
-    entity QHPersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet;
+    entity QHPersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet
+    { 
+        key pid,
+        key pan,
+        key positionId,
+        key qualificationGroup,
+        key qualificationName,
+        key referenceNumber,
+        requiringPositionTitle
+    };    
+    @readonly
+    entity EHProfleQualifications as projection on empqfl.ZPERSDATA_QFL;    
 }

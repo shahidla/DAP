@@ -51,6 +51,10 @@
       "zhr_person_extn_srv": {
         "kind": "odata-v2",
         "model": "srv/external/zhr_person_extn_srv"
+      },
+      "empqfl": {
+        "kind": "odata-v2",
+        "model": "srv/external/empqfl"
       }
     }
   },
