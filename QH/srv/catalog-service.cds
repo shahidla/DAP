@@ -48,6 +48,14 @@ service CatalogService {
         referenceNumber: String;
         requiringPositionTitle: String;
     };
+
+   @cds.persistence.exists
+   entity QHProfileGroups
+    { 
+        key pid : String;
+        key qualificationGroup: String;
+    };
+
           
     @readonly
     entity EHProfleQualifications as projection on empqfl.ZPERSDATA_QFL;    

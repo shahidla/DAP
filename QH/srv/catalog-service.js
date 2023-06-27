@@ -58,6 +58,47 @@ module.exports = async (srv) => {
     }
 
   });
+
+  // Profile Groups
+  srv.on("READ", "QHProfileGroups", async (request) => {
+
+    if (request.params[0]) {
+      const {
+        PersonNumber,
+        PersonnelAssignmentNumber
+      } = await request
+        .params[0];
+      const QH_Qfl_Q = SELECT.from(
+        "CatalogService.QHPersonProfleQualifications"
+      ).where({
+        pid: PersonNumber
+      });
+
+      const EH_Qfl_Q = SELECT.from(
+        "CatalogService.EHProfleQualifications"
+      ).where({
+        pid: PersonNumber,
+      });
+
+      const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
+      const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
+
+      if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
+        for (var i = 0; i < EH_Qfl_Res.length; i++) {
+
+          QH_Qfl_Res.push({
+            pid: EH_Qfl_Res[i].pid,
+            qualificationGroup: EH_Qfl_Res[i].qualificationGroup
+          });
+
+        }
+      }
+      QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
+      request.reply(QH_Qfl_Res);
+    }
+
+  });
+
   srv.on("READ", "QHRePerProQualifications", async (request) => {
     //console.log(request.params);
     console.log('test');
