@@ -33,8 +33,8 @@ service CatalogService {
         key pan,
         key positionId,
         key qualificationGroup,
-        key qualificationName,
-        key referenceNumber,
+        qualificationName,
+        referenceNumber,
         requiringPositionTitle
     };    
     @readonly
