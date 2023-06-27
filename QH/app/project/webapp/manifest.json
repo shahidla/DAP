@@ -105,7 +105,7 @@
                     "target": "QHPersonnelAssignmentsObjectPage"
                 },
                 {
-                    "pattern": "QHPersonnelAssignments({key})/PersonProfleQualificationsSet({key2}):?query:",
+                    "pattern": "QHPersonnelAssignments({key})/ProfileQfl({key2}):?query:",
                     "name": "QHPersonProfleQualificationsObjectPage",
                     "target": "QHPersonProfleQualificationsObjectPage"
                 }
@@ -125,6 +125,24 @@
                                         "route": "QHPersonnelAssignmentsObjectPage"
                                     }
                                 }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "DataField::OrganisationalUnitName": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::PositionNumber": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::PositionName": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::PersonName": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -138,13 +156,25 @@
                             "editableHeaderContent": false,
                             "entitySet": "QHPersonnelAssignments",
                             "navigation": {
-                                "PersonProfleQualificationsSet": {
+                                "ProfileQfl": {
                                     "detail": {
                                         "route": "QHPersonProfleQualificationsObjectPage"
                                     }
                                 }
                             },
-                            "sectionLayout": "Tabs"
+                            "sectionLayout": "Tabs",
+                            "controlConfiguration": {
+                                "PositionNavn/@com.sap.vocabularies.UI.v1.LineItem#OrgData": {
+                                    "columns": {
+                                        "DataField::OrganisationalUnitName": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::OrganisationalUnitNumber": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -155,7 +185,7 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "QHPersonProfleQualifications"
+                            "entitySet": "ProfileQfl"
                         }
                     }
                 }

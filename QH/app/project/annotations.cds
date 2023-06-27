@@ -4,8 +4,8 @@ annotate service.QHPersonnelAssignments with @(
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
-            Value : PersonNumber,
-            Label : 'Person ID',
+            Value : Pernr,
+            Label : 'Personl ID',
         },
         {
             $Type : 'UI.DataField',
@@ -22,6 +22,45 @@ annotate service.QHPersonnelAssignments with @(
             Value : LastName,
             Label : 'Last Name',
         },
+        {
+            $Type : 'UI.DataField',
+            Value : PersonProfleQualificationsSet.referenceNumber,
+            Label : 'Reference Number',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : OrganisationalUnitName,
+            Label : 'Organisational Unit Name',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : OrganisationalUnitNumber,
+            Label : 'Organisational Unit Number',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Role,
+            Label : 'Role',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : PositionNumber,
+            Label : 'PositionNumber',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : PositionName,
+            Label : 'PositionName',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : PersonName,
+            Label : 'Person Name',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : PersonFullName,
+        },
     ]
 );
 annotate service.QHPersonnelAssignments with @(
@@ -30,11 +69,6 @@ annotate service.QHPersonnelAssignments with @(
             $Type : 'UI.ReferenceFacet',
             ID : 'INFORMATION',
             Target : '@UI.FieldGroup#INFORMATION',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID : 'Contact',
-            Target : '@UI.FieldGroup#Contact',
         },
     ],
     UI.FieldGroup #INFORMATION : {
@@ -48,14 +82,6 @@ annotate service.QHPersonnelAssignments with @(
                 $Type : 'UI.DataField',
                 Value : LastName,
                 Label : 'Last Name',
-            },{
-                $Type : 'UI.DataField',
-                Value : PersonnelAssignmentNumber,
-                Label : 'Personnel Assignment Number',
-            },{
-                $Type : 'UI.DataField',
-                Value : PersonNumber,
-                Label : 'Person ID',
             },],
     }
 );
@@ -65,13 +91,13 @@ annotate service.QHPersonnelAssignments with @(
             $Type : 'UI.ReferenceFacet',
             Label : 'Org Data',
             ID : 'OrgData',
-            Target : 'PositionNavn/@UI.LineItem#OrgData',
+            Target : 'PositionNavn/@UI.PresentationVariant#OrgData',
         },
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Stamp Data',
             ID : 'StampData',
-            Target : 'ProfileQfl/@UI.LineItem#StampData',
+            Target : 'ProfileQfl/@UI.LineItem#StampData1',
         },
     ]
 );
@@ -80,27 +106,28 @@ annotate service.QHPosition with @(
         {
             $Type : 'UI.DataField',
             Value : PersonNumber,
-            Label : 'PersonNumber',
+            Label : 'Person Number',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : PersonnelAssignmentNumber,
+            Label : 'Personnel Assignment Number',
         },{
             $Type : 'UI.DataField',
             Value : PositionName,
-            Label : 'PositionName',
+            Label : 'Position Name',
         },{
             $Type : 'UI.DataField',
             Value : PositionNumber,
-            Label : 'PositionNumber',
-        },{
-            $Type : 'UI.DataField',
-            Value : PersonnelAssignmentNumber,
-            Label : 'PersonnelAssignmentNumber',
+            Label : 'Position Number',
         },{
             $Type : 'UI.DataField',
             Value : OrganisationalUnitNumber,
-            Label : 'OrganisationalUnitNumber',
+            Label : 'Organisational Unit Number',
         },{
             $Type : 'UI.DataField',
             Value : OrganisationalUnitName,
-            Label : 'OrganisationalUnitName',
+            Label : 'Organisational Unit Name',
         },]
 );
 annotate service.QHPersonProfleQualifications with @(
@@ -162,6 +189,7 @@ annotate service.QHPersonnelAssignments with @(
     UI.SelectionFields : [
         PersonFullName,
         PersonNumber,
+        PersonnelAssignmentNumber,
     ]
 );
 annotate service.QHPersonnelAssignments with {
@@ -198,3 +226,77 @@ annotate service.QHPersonnelAssignments with {
         },
         Common.ValueListWithFixedValues : true
 )};
+
+annotate service.QHPersonnelAssignments with {
+    PersonnelAssignmentNumber @Common.Label : 'Personnel Assignment Number'
+};
+annotate service.QHPersonnelAssignments with {
+    PersonnelAssignmentNumber @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'QHPersonnelAssignments',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : PersonnelAssignmentNumber,
+                    ValueListProperty : 'PersonnelAssignmentNumber',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};
+annotate service.QHPosition with @(
+    UI.PresentationVariant #OrgData : {
+        $Type : 'UI.PresentationVariantType',
+        Visualizations : [
+            '@UI.LineItem#OrgData',
+        ],
+    }
+);
+annotate service.QHPersonProfleQualifications with @(
+    UI.PresentationVariant #StampData : {
+        $Type : 'UI.PresentationVariantType',
+        Visualizations : [
+            '@UI.LineItem#StampData',
+        ],
+    }
+);
+annotate service.QHPersonProfleQualifications with @(
+    UI.LineItem #StampData1 : [
+        {
+            $Type : 'UI.DataField',
+            Value : pid,
+            Label : 'Personl ID',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : pan,
+            Label : 'Personnel Assignment Number',
+        },{
+            $Type : 'UI.DataField',
+            Value : positionId,
+            Label : 'Position ID',
+        },{
+            $Type : 'UI.DataField',
+            Value : qualificationName,
+            Label : 'Stamp Name',
+        },{
+            $Type : 'UI.DataField',
+            Value : qualificationGroup,
+            Label : 'Stamp Type',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : referenceNumber,
+            Label : 'Reference',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : empQualficationStart,
+            Label : 'Last Checked',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : empQualifictionEnd,
+            Label : 'Validity End',
+        },]
+);
