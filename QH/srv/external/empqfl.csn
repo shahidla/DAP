@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "creator": "cds-dk 6.8.2"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "empqfl": {
+      "kind": "service",
+      "@cds.external": true,
+      "@m.IsDefaultEntityContainer": "true",
+      "@sap.message.scope.supported": "true",
+      "@sap.supported.formats": "atom json xlsx"
+    },
+    "empqfl.ZPERSDATA_QFL": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.content.version": "1",
+      "@sap.label": "pers data",
+      "elements": {
+        "pid": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": "",
+          "notNull": true
+        },
+        "pan": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": "",
+          "notNull": true
+        },
+        "positionId": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "requiringPositionTitle": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "qualificationGroup": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "qualificationName": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "ratingText": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "empQualficationStart": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "empQualifictionEnd": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        },
+        "referenceNumber": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "30 Characters",
+          "@sap.heading": ""
+        }
+      }
+    }
+  }
+}
