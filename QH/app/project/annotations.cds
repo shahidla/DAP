@@ -103,7 +103,7 @@ annotate service.QHPersonnelAssignments with @(
             $Type : 'UI.ReferenceFacet',
             Label : 'Stamp Data',
             ID : 'StampData',
-            Target : 'ProfileQfl/@UI.LineItem#StampData1',
+            Target : 'ProfileGroups/@UI.LineItem#StampData',
         },
         {
             $Type : 'UI.ReferenceFacet',
@@ -356,5 +356,17 @@ annotate service.QHRePerProQualifications with @(
             $Type : 'UI.DataField',
             Value : requiringPositionTitle,
             Label : 'requiringPositionTitle',
+        },]
+);
+annotate service.QHProfileGroups with @(
+    UI.LineItem #StampData : [
+        {
+            $Type : 'UI.DataField',
+            Value : pid,
+            Label : 'pid',
+        },{
+            $Type : 'UI.DataField',
+            Value : qualificationGroup,
+            Label : 'qualificationGroup',
         },]
 );
