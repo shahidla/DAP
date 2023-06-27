@@ -36,7 +36,19 @@ service CatalogService {
         qualificationName,
         referenceNumber,
         requiringPositionTitle
-    };    
+    };
+   @cds.persistence.exists
+   entity QHRePerProQualifications  
+    { 
+        key pid : String;
+        key pan: String;
+        key positionId: String;
+        key qualificationGroup: String;
+        qualificationName: String;
+        referenceNumber: String;
+        requiringPositionTitle: String;
+    };
+          
     @readonly
     entity EHProfleQualifications as projection on empqfl.ZPERSDATA_QFL;    
 }
