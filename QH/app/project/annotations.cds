@@ -368,16 +368,7 @@ annotate service.QHProfileGroups with @(
         Label : '',
         ID    : 'TypeofStamps',
         Target: '@UI.FieldGroup#TypeofStamps',
-    },
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID : 'FistName',
-            Target : '@UI.FieldGroup#FistName',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Target : '@UI.FieldGroup#LastName',
-        } ],
+    } ],
     UI.FieldGroup #TypeofStamps: {
         $Type: 'UI.FieldGroupType',
         Data : [
@@ -461,6 +452,10 @@ annotate service.QHProfileGroups with @(
                 $Type : 'UI.DataField',
                 Value : ProInfo.FirstName,
                 Label : 'First Name',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : ProInfo.PersonFullName,
             },],
     }
 );

@@ -3,9 +3,11 @@ using {zhr_person_extn_srv} from './external/zhr_person_extn_srv';
 using { empqfl } from './external/empqfl';
 
 service CatalogService {
+    @readonly
     entity QHPosition                   as projection on zhr_person_extn_srv.PositionSet;
+    @readonly
     entity QHPersonIdentity             as projection on zhr_person_extn_srv.PersonIdentitySet;
-
+    @readonly
     entity QHPersonnelAssignments       as projection on zhr_person_extn_srv.PersonnelAssignmentsSet {
         PersonNumber,
         PersonnelAssignmentNumber,
@@ -25,8 +27,9 @@ service CatalogService {
         PersonProfileAllowsSet,
         PersonProfileAwardsSet
     };
-
+    @readonly
     entity QHPersonProfileContact       as projection on zhr_person_extn_srv.PersonProfileContactSet;
+    @readonly
     entity QHPersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet
     { 
         key pid ,
@@ -37,6 +40,7 @@ service CatalogService {
         referenceNumber,
         requiringPositionTitle
     };
+   @readonly 
    @cds.persistence.exists
    entity QHRePerProQualifications  
     { 
@@ -48,7 +52,7 @@ service CatalogService {
         referenceNumber: String;
         requiringPositionTitle: String;
     };
-
+    @readonly
    @cds.persistence.exists
    entity QHProfileGroups
     { 
