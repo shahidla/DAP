@@ -99,9 +99,9 @@ annotate service.QHPersonnelAssignments with @(UI.Facets: [
     },
     {
         $Type : 'UI.ReferenceFacet',
-        Label : 'Rigistration Data',
-        ID    : 'Rigistration',
-        Target: 'ReProfile/@UI.LineItem#Rigistration',
+        Label : 'Registration Data',
+        ID    : 'Registration',
+        Target: 'ReProfile/@UI.LineItem#Registration',
     },
     {
         $Type : 'UI.ReferenceFacet',
@@ -333,7 +333,7 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #StampData1: [
     },
 ]);
 
-annotate service.QHRePerProQualifications with @(UI.LineItem #Rigistration: [
+annotate service.QHRePerProQualifications with @(UI.LineItem #Registration: [
     {
         $Type: 'UI.DataField',
         Value: pid,
@@ -386,6 +386,11 @@ annotate service.QHProfileGroups with @(
                 $Type: 'UI.DataField',
                 Value: qualificationGroup,
                 Label: 'Type of Stamps',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: LastName,
+                Label: 'Last Name',
             }
            
         ],

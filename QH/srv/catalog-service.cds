@@ -29,7 +29,7 @@ service CatalogService {
     entity QHPersonProfileContact       as projection on zhr_person_extn_srv.PersonProfileContactSet;
     entity QHPersonProfleQualifications as projection on zhr_person_extn_srv.PersonProfleQualificationsSet
     { 
-        key pid,
+        key pid ,
         key pan,
         key positionId,
         key qualificationGroup,
