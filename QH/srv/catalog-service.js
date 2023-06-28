@@ -13,110 +13,29 @@ module.exports = async (srv) => {
     EHPersonProfleQualifications
   } = EHService.entities("CatalogService");
 
-  // srv.on("READ", "QHPersonProfleQualifications", async (request) => {
-  //   //console.log(request.params);
-  //   if (request.params[0]) {
-  //     const {
-  //       PersonNumber
-  //     } = await request
-  //       .params[0];
-
-  //     const QH_Qfl_Q = SELECT.from(
-  //       "CatalogService.QHPersonProfleQualifications"
-  //     ).where({
-  //       pid: PersonNumber
-  //     });
-  //     if (request.params[1]) {
-  //       const {
-  //         qualificationGroup
-  //       } = await request
-  //         .params[1];
-  //       const QH_Qfl_Q = SELECT.from(
-  //         "CatalogService.QHPersonProfleQualifications"
-  //       ).where({
-  //         pid: PersonNumber,
-  //         qualificationGroup: qualificationGroup
-  //       });
-
-  //       const EH_Qfl_Q = SELECT.from(
-  //         "CatalogService.EHProfleQualifications"
-  //       ).where({
-  //         pid: PersonNumber,
-  //         qualificationGroup: qualificationGroup
-  //       });
-  //       var QH_Qfl_data = await cds.run(QH_Qfl_Q); // first odata result
-  //       var EH_Qfl_data = await cds.run(EH_Qfl_Q); // second odata result
-
-  //       if (EH_Qfl_data && EH_Qfl_data.length > 0) {
-  //         for (var i = 0; i < EH_Qfl_data.length; i++) {
-
-  //           QH_Qfl_data.push({
-  //             pid: EH_Qfl_data[i].pid,
-  //             pan: EH_Qfl_data[i].pan,
-  //             positionId: EH_Qfl_data[i].positionId,
-  //             qualificationGroup: EH_Qfl_data[i].qualificationGroup,
-  //             qualificationName: EH_Qfl_data[i].qualificationName,
-  //             referenceNumber: EH_Qfl_data[i].referenceNumber
-  //           });
-
-  //         }
-  //       }
-
-  //       QH_Qfl_data["$count"] = QH_Qfl_data.length;
-  //       return request.reply(QH_Qfl_data)
-  //     }
-  //     const EH_Qfl_Q = SELECT.from(
-  //       "CatalogService.EHProfleQualifications"
-  //     ).where({
-  //       pid: PersonNumber,
-  //     });
-
-  //     const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-  //     const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-
-  //     //console.log(EH_Qfl_Res);
-  //     //console.log(QH_Qfl_Res);
-
-  //     if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
-  //       for (var i = 0; i < EH_Qfl_Res.length; i++) {
-
-  //         QH_Qfl_Res.push({
-  //           pid: EH_Qfl_Res[i].pid,
-  //           pan: EH_Qfl_Res[i].pan,
-  //           positionId: EH_Qfl_Res[i].positionId,
-  //           qualificationGroup: EH_Qfl_Res[i].qualificationGroup,
-  //           qualificationName: EH_Qfl_Res[i].qualificationName,
-  //           referenceNumber: EH_Qfl_Res[i].referenceNumber
-  //         });
-
-  //       }
-  //     }
-  //     QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
-  //     request.reply(QH_Qfl_Res);
-  //   }
-
-  // });
-
   // Profile Groups
-  srv.on("READ", "QHProfileGroups", async (request) => {
+  srv.on("READ", "QHProfileGroups", async (request) => { 
+    
     if (request.params[0]) {
       const {
         PersonNumber,
         PersonnelAssignmentNumber
       } = await request
         .params[0];
+
       if (request.params[1]) {
         const {
           qualificationGroup
         } = await request
           .params[1];
-        const QH_Qfl_Q = SELECT.from(
-          "CatalogService.QHPersonProfleQualifications"
+        
+          const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
+          .from("CatalogService.QHPersonProfleQualifications"
         ).where({
           pid: PersonNumber,
           qualificationGroup: qualificationGroup
         });
-
+        
         const EH_Qfl_Q = SELECT.from(
           "CatalogService.EHProfleQualifications"
         ).where({
@@ -125,7 +44,7 @@ module.exports = async (srv) => {
         });
         const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
         const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-
+        
         if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
           for (var i = 0; i < EH_Qfl_Res.length; i++) {
 
@@ -137,13 +56,10 @@ module.exports = async (srv) => {
           }
         }
         var res = QH_Qfl_Res[0]
-        //res['pid'] = QH_Qfl_Res[0]['pid'];
-        //res['qualificationGroup'] = qualificationGroup;
         res["$count"] = 1;
-        //console.log(res);
         return request.reply(res);
       };
-      const QH_Qfl_Q = SELECT.from(
+      const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
         "CatalogService.QHPersonProfleQualifications"
       ).where({
         pid: PersonNumber
@@ -179,8 +95,6 @@ module.exports = async (srv) => {
   });
 
   srv.on("READ", "QHRePerProQualifications", async (request) => {
-    //console.log(request.params);
-    console.log('test');
     if (request.params[0]) {
       const {
         PersonNumber,
@@ -197,7 +111,6 @@ module.exports = async (srv) => {
 
 
       var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-      //var EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
 
       try {
         // Perform some logic
@@ -208,14 +121,13 @@ module.exports = async (srv) => {
         log.error('Error occurred during CREATE:', error);
         throw error;
       }
-      console.log(QH_Qfl_Res)
+
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
     }
 
   });
   srv.on("READ", "QHPersonProfleQualifications", async (request) => {
-    //console.log(request.params);
     var qc = {};
     if (request.params[0]) {
       const {
@@ -242,9 +154,6 @@ module.exports = async (srv) => {
 
       const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
       const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-
-      //console.log(EH_Qfl_Res);
-      //console.log(QH_Qfl_Res);
 
       if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
         for (var i = 0; i < EH_Qfl_Res.length; i++) {
