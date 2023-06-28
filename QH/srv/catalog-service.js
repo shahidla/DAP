@@ -61,13 +61,38 @@ module.exports = async (srv) => {
 
   // Profile Groups
   srv.on("READ", "QHProfileGroups", async (request) => {
-
     if (request.params[0]) {
       const {
         PersonNumber,
         PersonnelAssignmentNumber
       } = await request
         .params[0];
+      if (request.params[1]) {
+        const {
+          qualificationGroup
+        } = await request
+          .params[1];
+        const QH_Qfl_Q = SELECT.from(
+          "CatalogService.QHPersonProfleQualifications"
+        ).where({
+          pid: PersonNumber,
+          qualificationGroup: qualificationGroup
+        });
+
+        const EH_Qfl_Q = SELECT.from(
+          "CatalogService.EHProfleQualifications"
+        ).where({
+          pid: PersonNumber,
+          qualificationGroup: qualificationGroup
+        });
+        const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
+        const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
+        console.log(QH_Qfl_Res)
+
+        return request.reply({
+          "ProfileQfl":QH_Qfl_Res
+        });
+      };
       const QH_Qfl_Q = SELECT.from(
         "CatalogService.QHPersonProfleQualifications"
       ).where({
@@ -79,7 +104,11 @@ module.exports = async (srv) => {
       ).where({
         pid: PersonNumber,
       });
+      if (request.params[1]) {
+        var pid = request.params[1].pid;
+        var qualificationGroup = request.params[1].qualificationGroup;
 
+      };
       const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
       const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
 
@@ -115,20 +144,20 @@ module.exports = async (srv) => {
         pid: PersonNumber
       });
 
-  
+
 
       var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
       //var EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-     
+
       try {
         // Perform some logic
-        QH_Qfl_Res = QH_Qfl_Res.filter(function(ele){
-          return  ele.qualificationGroup == 'Registration';
+        QH_Qfl_Res = QH_Qfl_Res.filter(function (ele) {
+          return ele.qualificationGroup == 'Registration';
         })
       } catch (error) {
         log.error('Error occurred during CREATE:', error);
         throw error;
-      }    
+      }
       console.log(QH_Qfl_Res)
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);

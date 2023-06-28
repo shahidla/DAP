@@ -105,9 +105,9 @@
                     "target": "QHPersonnelAssignmentsObjectPage"
                 },
                 {
-                    "pattern": "QHPersonnelAssignments({key})/ProfileQfl({key2}):?query:",
-                    "name": "QHPersonProfleQualificationsObjectPage",
-                    "target": "QHPersonProfleQualificationsObjectPage"
+                    "pattern": "QHPersonnelAssignments({key})/ProfileGroups({key2}):?query:",
+                    "name": "QHPersonnelAssignments_ProfileGroupsObjectPage",
+                    "target": "QHPersonnelAssignments_ProfileGroupsObjectPage"
                 }
             ],
             "targets": {
@@ -156,9 +156,9 @@
                             "editableHeaderContent": false,
                             "entitySet": "QHPersonnelAssignments",
                             "navigation": {
-                                "ProfileQfl": {
+                                "ProfileGroups": {
                                     "detail": {
-                                        "route": "QHPersonProfleQualificationsObjectPage"
+                                        "route": "QHPersonnelAssignments_ProfileGroupsObjectPage"
                                     }
                                 }
                             },
@@ -194,14 +194,14 @@
                         }
                     }
                 },
-                "QHPersonProfleQualificationsObjectPage": {
+                "QHPersonnelAssignments_ProfileGroupsObjectPage": {
                     "type": "Component",
-                    "id": "QHPersonProfleQualificationsObjectPage",
+                    "id": "QHPersonnelAssignments_ProfileGroupsObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "editableHeaderContent": false,
-                            "entitySet": "ProfileQfl"
+                            "contextPath": "/QHPersonnelAssignments/ProfileGroups",
+                            "navigation": {}
                         }
                     }
                 }
