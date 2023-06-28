@@ -10,10 +10,10 @@ extend projection CatalogService.QHPersonnelAssignments with {
 }
 
 extend entity CatalogService.QHProfileGroups with {
+  ProInfo      : Association to one CatalogService.QHPersonnelAssignments
+                   on ProInfo.PersonNumber = pid;
 
   ProfileNames : Association to many CatalogService.QHPersonProfleQualifications
-                                
-                 on  ProfileNames.pid                = pid
-                 and ProfileNames.qualificationGroup = qualificationGroup
+                   on ProfileNames.pid = pid
 
 }

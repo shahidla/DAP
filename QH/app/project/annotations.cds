@@ -67,24 +67,14 @@ annotate service.QHPersonnelAssignments with @(
         $Type : 'UI.ReferenceFacet',
         ID    : 'INFORMATION',
         Target: '@UI.FieldGroup#INFORMATION',
+        Label : 'Contact',
     }, ],
     UI.FieldGroup #INFORMATION: {
         $Type: 'UI.FieldGroupType',
         Data : [
             {
-                $Type: 'UI.DataField',
-                Value: FirstName,
-                Label: 'First Name',
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: LastName,
-                Label: 'Last Name',
-            },
-            {
                 $Type : 'UI.DataFieldForAnnotation',
-                Target: '@Communication.Contact',
-                Label : 'Contact'
+                Target: '@Communication.Contact'
             }
         ],
     }
@@ -378,7 +368,16 @@ annotate service.QHProfileGroups with @(
         Label : '',
         ID    : 'TypeofStamps',
         Target: '@UI.FieldGroup#TypeofStamps',
-    } ],
+    },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'FistName',
+            Target : '@UI.FieldGroup#FistName',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#LastName',
+        } ],
     UI.FieldGroup #TypeofStamps: {
         $Type: 'UI.FieldGroupType',
         Data : [
@@ -386,11 +385,6 @@ annotate service.QHProfileGroups with @(
                 $Type: 'UI.DataField',
                 Value: qualificationGroup,
                 Label: 'Type of Stamps',
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: LastName,
-                Label: 'Last Name',
             }
            
         ],
@@ -439,3 +433,59 @@ annotate service.QHProfileGroups with @(UI.Facets: [{
     ID    : 'test',
     Target: 'ProfileNames/@UI.LineItem#test',
 }, ]);
+annotate service.QHPersonnelAssignments with @(
+    UI.FieldGroup #Information2 : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : FirstName,
+            },],
+    }
+);
+annotate service.QHPersonnelAssignments with @(
+    UI.FieldGroup #information3 : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : LastName,
+            },],
+    }
+);
+annotate service.QHProfileGroups with @(
+    UI.FieldGroup #FistName : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : ProInfo.FirstName,
+                Label : 'First Name',
+            },],
+    }
+);
+annotate service.QHProfileGroups with @(
+    UI.FieldGroup #LastName : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : ProInfo.LastName,
+                Label : 'Last Name',
+            },],
+    }
+);
+// annotate service.QHPersonnelAssignments with @(
+
+//     UI.HeaderFacets           : [{
+
+//         $Type : 'UI.ReferenceFacet',
+
+//         ID    : 'INFORMATION',
+
+//         Label  : 'Employee Information',
+
+//         Target: '@UI.FieldGroup#INFORMATION',
+
+//     }]
+// );

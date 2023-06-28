@@ -189,6 +189,22 @@
                                             "availability": "Hidden"
                                         }
                                     }
+                                },
+                                "ReProfile/@com.sap.vocabularies.UI.v1.LineItem#Registration": {
+                                    "columns": {
+                                        "DataField::pid": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::pan": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::requiringPositionTitle": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::positionId": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
                                 }
                             }
                         }
