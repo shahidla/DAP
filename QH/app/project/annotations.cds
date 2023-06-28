@@ -106,8 +106,8 @@ annotate service.QHPersonnelAssignments with @(UI.Facets: [
     {
         $Type : 'UI.ReferenceFacet',
         Label : 'Stamp List',
-        ID : 'StampList',
-        Target : 'ProfileGroups/@UI.LineItem#StampList',
+        ID    : 'StampList',
+        Target: 'ProfileGroups/@UI.LineItem#StampList',
     },
 ]);
 
@@ -372,63 +372,65 @@ annotate service.QHRePerProQualifications with @(UI.LineItem #Rigistration: [
 ]);
 
 
-
 annotate service.QHProfileGroups with @(
     UI.HeaderFacets    : [{
         $Type : 'UI.ReferenceFacet',
-        Label : 'test',
-        ID    : 'test',
-        Target: '@UI.FieldGroup#test',
-    }, ],
-    UI.FieldGroup #test: {
+        Label : '',
+        ID    : 'TypeofStamps',
+        Target: '@UI.FieldGroup#TypeofStamps',
+    } ],
+    UI.FieldGroup #TypeofStamps: {
         $Type: 'UI.FieldGroupType',
-        Data : [{
-            $Type: 'UI.DataField',
-            Value: pid,
-            Label: 'Email',
-        }, ],
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: qualificationGroup,
+                Label: 'Type of Stamps',
+            }
+           
+        ],
     }
 );
-annotate service.QHProfileGroups with @(
-    UI.LineItem #StampList : [
-        {
-            $Type : 'UI.DataField',
-            Value : pid,
-            Label : 'pid',
-        },{
-            $Type : 'UI.DataField',
-            Value : qualificationGroup,
-            Label : 'qualificationGroup',
-        },]
-);
 
-annotate service.QHPersonProfleQualifications with @(
-    UI.LineItem #test : [
-        {
-            $Type : 'UI.DataField',
-            Value : pid,
-            Label : 'pid',
-        },{
-            $Type : 'UI.DataField',
-            Value : qualificationGroup,
-            Label : 'qualificationGroup',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : qualificationName,
-            Label : 'qualificationName',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : referenceNumber,
-            Label : 'referenceNumber',
-        }]
-);
-annotate service.QHProfileGroups with @(UI.Facets: [
-{
-        $Type : 'UI.ReferenceFacet',
-        Label : 'test',
-        ID    : 'test',
-        Target: 'ProfileNames/@UI.LineItem#test',
+annotate service.QHProfileGroups with @(UI.LineItem #StampList: [
+    {
+        $Type: 'UI.DataField',
+        Value: pid,
+        Label: 'pid',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: qualificationGroup,
+        Label: 'qualificationGroup',
     },
 ]);
+
+annotate service.QHPersonProfleQualifications with @(UI.LineItem #test: [
+    {
+        $Type: 'UI.DataField',
+        Value: pid,
+        Label: 'pid',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: qualificationGroup,
+        Label: 'qualificationGroup',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: qualificationName,
+        Label: 'qualificationName',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: referenceNumber,
+        Label: 'referenceNumber',
+    }
+]);
+
+annotate service.QHProfileGroups with @(UI.Facets: [{
+    $Type : 'UI.ReferenceFacet',
+    Label : 'Stamp Collection Details',
+    ID    : 'test',
+    Target: 'ProfileNames/@UI.LineItem#test',
+}, ]);
