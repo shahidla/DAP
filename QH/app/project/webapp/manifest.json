@@ -125,24 +125,6 @@
                                         "route": "QHPersonnelAssignmentsObjectPage"
                                     }
                                 }
-                            },
-                            "controlConfiguration": {
-                                "@com.sap.vocabularies.UI.v1.LineItem": {
-                                    "columns": {
-                                        "DataField::OrganisationalUnitName": {
-                                            "availability": "Hidden"
-                                        },
-                                        "DataField::PositionNumber": {
-                                            "availability": "Hidden"
-                                        },
-                                        "DataField::PositionName": {
-                                            "availability": "Hidden"
-                                        },
-                                        "DataField::PersonName": {
-                                            "availability": "Hidden"
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
