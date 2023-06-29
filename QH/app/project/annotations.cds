@@ -85,7 +85,7 @@ annotate service.QHPersonnelAssignments with @(UI.Facets: [
         $Type : 'UI.ReferenceFacet',
         Label : 'Org Data',
         ID    : 'OrgData',
-        Target: 'PositionNavn/@UI.PresentationVariant#OrgData',
+        Target: 'ProPostions/@UI.PresentationVariant#OrgData',
     },
     {
         $Type : 'UI.ReferenceFacet',
