@@ -22,7 +22,7 @@ module.exports = async (srv) => {
         PersonnelAssignmentNumber
       } = await request
         .params[0];
-      
+
       // 3rd page
       if (request.params[1]) {
         const {
@@ -87,13 +87,13 @@ module.exports = async (srv) => {
       ).where({
         pid: PersonNumber,
       }).search(chk);
-      
+
       // add additional conditions
       if (searchconditions) {
         searchconditions.forEach((condition, index) => {
           if (index != 0) {
-            QH_Qfl_Q.SELECT.search.push(condition); 
-            EH_Qfl_Q.SELECT.search.push(condition);   
+            QH_Qfl_Q.SELECT.search.push(condition);
+            EH_Qfl_Q.SELECT.search.push(condition);
             chk = "";
           }
         });
@@ -104,8 +104,8 @@ module.exports = async (srv) => {
         var qualificationGroup = request.params[1].qualificationGroup;
 
       };
-      const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-      const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
+      var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
+      var EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
 
       if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
         for (var i = 0; i < EH_Qfl_Res.length; i++) {
@@ -117,17 +117,16 @@ module.exports = async (srv) => {
 
         }
       }
-     
-      // // filter registration data from the stamp list tab
-      // try {
-      //   QH_Qfl_Res = QH_Qfl_Res.filter(function (ele) {
-      //     console.log(ele.qualificationGroup)
-      //     //return ele.qualificationGroup != "Registration";
-      //   });
-      // } catch (error) {
-      //   log.error("Error:", error);
-      //   throw error;
-      // }
+
+      // filter registration data from the stamp list tab
+      try {
+        QH_Qfl_Res = QH_Qfl_Res.filter(function (elem) {
+          return elem.qualificationGroup != "Registration";
+        });
+      } catch (error) {
+        log.error("Error:", error);
+        throw error;
+      }
 
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
@@ -165,16 +164,16 @@ module.exports = async (srv) => {
       ).where({
         pid: PersonNumber
       }).search(chk);
-      
+
       // add additional conditions
       if (searchconditions) {
         searchconditions.forEach((condition, index) => {
           if (index != 0) {
-            QH_Qfl_Q.SELECT.search.push(condition); 
+            QH_Qfl_Q.SELECT.search.push(condition);
             chk = "";
           }
         });
-      }      
+      }
 
       var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
 
@@ -233,7 +232,7 @@ module.exports = async (srv) => {
       var EH_Qfl_Q = SELECT.from(
         "CatalogService.EHProfleQualifications"
       ).where(qc).search(chk);
-      
+
       // add additional conditions
       if (searchconditions) {
         searchconditions.forEach((condition, index) => {
