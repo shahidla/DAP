@@ -38,7 +38,10 @@ service CatalogService {
         key qualificationGroup,
         qualificationName,
         referenceNumber,
-        requiringPositionTitle
+        requiringPositionTitle,
+        empQualficationStart,
+        empQualifictionEnd,
+        pid as Pernr: String
     };
    @readonly 
    @cds.persistence.exists
@@ -51,6 +54,8 @@ service CatalogService {
         qualificationName: String;
         referenceNumber: String;
         requiringPositionTitle: String;
+        empQualficationStart : DateTime;
+        empQualifictionEnd :DateTime;
     };
     @readonly
    @cds.persistence.exists

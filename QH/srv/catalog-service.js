@@ -164,7 +164,8 @@ module.exports = async (srv) => {
             positionId: EH_Qfl_Res[i].positionId,
             qualificationGroup: EH_Qfl_Res[i].qualificationGroup,
             qualificationName: EH_Qfl_Res[i].qualificationName,
-            referenceNumber: EH_Qfl_Res[i].referenceNumber
+            referenceNumber: EH_Qfl_Res[i].referenceNumber,
+            
           });
 
         }
