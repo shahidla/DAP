@@ -415,6 +415,16 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #test: [
         Label: 'Person ID',
     },
     {
+        $Type : 'UI.DataField',
+        Value : pan,
+        Label : 'Personnel Assignment Number',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : positionId,
+        Label : 'Position Number',
+    },
+    {
         $Type: 'UI.DataField',
         Value: qualificationGroup,
         Label: 'Stamp Type',
@@ -427,7 +437,7 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #test: [
     {
         $Type: 'UI.DataField',
         Value: referenceNumber,
-        Label: 'Reference Number',
+        Label: 'AHPRA Registration Number',
     },
     {
         $Type: 'UI.DataField',

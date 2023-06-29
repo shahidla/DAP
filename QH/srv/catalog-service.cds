@@ -39,8 +39,8 @@ service CatalogService {
         qualificationName,
         referenceNumber,
         requiringPositionTitle,
-        empQualficationStart,
-        empQualifictionEnd,
+        empQualficationStart : DateTime,
+        empQualifictionEnd : DateTime,
         pid as Pernr: String
     };
    @readonly 

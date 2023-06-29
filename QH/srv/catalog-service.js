@@ -121,7 +121,7 @@ module.exports = async (srv) => {
         log.error('Error occurred during CREATE:', error);
         throw error;
       }
-
+      console.log(QH_Qfl_Res)
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
     }
