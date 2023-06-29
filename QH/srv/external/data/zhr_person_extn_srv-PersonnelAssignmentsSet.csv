@@ -7,3 +7,10 @@ PersonNumber, PersonnelAssignmentNumber,FirstName,WorkingHours,Message, PeriodEn
 10000005,90000005,Daniel,0,M1,,R1,4000005,Daniel Dagan,Dagan,,M1,Cloud,M1,M1,0,M1,M1
 10000006,90000006,James,0,M1,,R1,4000006,James Caston,Caston,,M1,Resourcing,M1,M1,0,M1,M1
 10000007,90000007,Mauricio,0,M1,,R1,4000007,Mauricio Lauffer,Lauffer,,M1,Architect,M1,M1,0,M1,M1
+250002,250002,Brent,0,M1,,R1,30000002,Brent Radford,Radford,,M1,Doctor,M1,M1,0,M1,M1
+250002,250003,Brent,0,M1,,R1,30000002,Brent Radford,Radford,,M1,Doctor,M1,M1,0,M1,M1
+250002,250004,Brent,0,M1,,R1,00000000,Brent Radford,Radford,,M1,Doctor,M1,M1,0,M1,M1
+250002,250005,Brent,0,M1,,R1,00000000,Brent Radford,Radford,,M1,Surgeon,M1,M1,0,M1,M1
+250002,250006,Brent,0,M1,,R1,00000000,Brent Radford,Radford,,M1,Surgeon,M1,M1,0,M1,M1
+250002,250007,Brent,0,M1,,R1,00000000,Brent Radford,Radford,,M1,Surgeon,M1,M1,0,M1,M1
+250002,250008,Brent,0,M1,,R1,00000000,Brent Radford,Radford,,M1,Surgeon,M1,M1,0,M1,M1

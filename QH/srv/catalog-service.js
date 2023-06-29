@@ -37,7 +37,7 @@ module.exports = async (srv) => {
             qualificationGroup: qualificationGroup
           });
 
-        var EH_Qfl_Q = SELECT.from(
+        var EH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
           "CatalogService.EHProfleQualifications"
         ).where({
           pid: PersonNumber,
@@ -82,7 +82,7 @@ module.exports = async (srv) => {
         pid: PersonNumber
       }).search(chk);             // search filter - second page - Stamp List Tab
 
-      var EH_Qfl_Q = SELECT.from(
+      var EH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
         "CatalogService.EHProfleQualifications"
       ).where({
         pid: PersonNumber,
