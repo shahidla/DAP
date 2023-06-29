@@ -6,7 +6,7 @@ extend projection CatalogService.QHPersonnelAssignments with {
   ProContact            : Association to one CatalogService.QHPersonIdentity on ProContact.pid = PersonNumber,
   ReProfile             : Association to many CatalogService.QHRePerProQualifications on ReProfile.pid = PersonNumber,
   ProfileGroups         : Association to many CatalogService.QHProfileGroups on ProfileGroups.pid = PersonNumber,
-  ProPostions           : Association to   many CatalogService.QHPosition on ProPostions.PersonNumber = PersonNumber
+  ProPositions           : Association to   many CatalogService.QHPosition on ProPositions.PersonNumber = PersonNumber
 }
 
 extend entity CatalogService.QHProfileGroups with {
