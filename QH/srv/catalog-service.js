@@ -14,8 +14,8 @@ module.exports = async (srv) => {
   } = EHService.entities("CatalogService");
 
   // Profile Groups
-  srv.on("READ", "QHProfileGroups", async (request) => { 
-    
+  srv.on("READ", "QHProfileGroups", async (request) => {
+
     if (request.params[0]) {
       const {
         PersonNumber,
@@ -28,14 +28,14 @@ module.exports = async (srv) => {
           qualificationGroup
         } = await request
           .params[1];
-        
-          const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
+
+        const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
           .from("CatalogService.QHPersonProfleQualifications"
-        ).where({
-          pid: PersonNumber,
-          qualificationGroup: qualificationGroup
-        });
-        
+          ).where({
+            pid: PersonNumber,
+            qualificationGroup: qualificationGroup
+          });
+
         const EH_Qfl_Q = SELECT.from(
           "CatalogService.EHProfleQualifications"
         ).where({
@@ -44,7 +44,7 @@ module.exports = async (srv) => {
         });
         const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
         const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-        
+
         if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
           for (var i = 0; i < EH_Qfl_Res.length; i++) {
 
@@ -121,7 +121,7 @@ module.exports = async (srv) => {
         log.error('Error occurred during CREATE:', error);
         throw error;
       }
-      console.log(QH_Qfl_Res)
+      //console.log(QH_Qfl_Res)
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
     }
@@ -135,7 +135,7 @@ module.exports = async (srv) => {
       } = await request
         .params[0];
       qc['pid'] = PersonNumber;
-    
+
       if (request.params[1]) {
         const {
           qualificationGroup
@@ -143,11 +143,11 @@ module.exports = async (srv) => {
           .params[1];
         qc['qualificationGroup'] = qualificationGroup;
       }
-      
+
       const QH_Qfl_Q = SELECT.from(
         "CatalogService.QHPersonProfleQualifications"
       ).where(qc);
-    
+
       const EH_Qfl_Q = SELECT.from(
         "CatalogService.EHProfleQualifications"
       ).where(qc);
@@ -165,7 +165,10 @@ module.exports = async (srv) => {
             qualificationGroup: EH_Qfl_Res[i].qualificationGroup,
             qualificationName: EH_Qfl_Res[i].qualificationName,
             referenceNumber: EH_Qfl_Res[i].referenceNumber,
-            
+            Pernr: EH_Qfl_Res[i].pid,
+            requiringPositionTitle: EH_Qfl_Res[i].requiringPositionTitle,
+            empQualficationStart: EH_Qfl_Res[i].empQualficationStart,
+            empQualifictionEnd: EH_Qfl_Res[i].empQualifictionEnd
           });
 
         }
@@ -175,5 +178,5 @@ module.exports = async (srv) => {
     }
 
   });
- 
+
 };

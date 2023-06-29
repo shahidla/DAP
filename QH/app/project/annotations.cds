@@ -151,14 +151,15 @@ annotate service.QHPosition with @(UI.LineItem #OrgData: [
     },
     {
         $Type: 'UI.DataField',
+        Value: OrganisationalUnitName,
+        Label: 'Organisational Unit Name',
+    },    
+    {
+        $Type: 'UI.DataField',
         Value: OrganisationalUnitNumber,
         Label: 'Organisational Unit Number',
     },
-    {
-        $Type: 'UI.DataField',
-        Value: OrganisationalUnitName,
-        Label: 'Organisational Unit Name',
-    },
+
 ]);
 
 // annotate service.QHPersonProfleQualifications with @(UI.LineItem #StampData: [
@@ -308,7 +309,7 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #StampData1: [
     {
         $Type: 'UI.DataField',
         Value: positionId,
-        Label: 'Position ID',
+        Label: 'Position Number',
     },
     {
         $Type: 'UI.DataField',
@@ -437,7 +438,7 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #test: [
     {
         $Type: 'UI.DataField',
         Value: referenceNumber,
-        Label: 'AHPRA Registration Number',
+        Label: 'Registration Number',
     },
     {
         $Type: 'UI.DataField',

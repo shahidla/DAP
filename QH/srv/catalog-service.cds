@@ -67,5 +67,9 @@ service CatalogService {
     };
          
     @readonly
-    entity EHProfleQualifications as projection on empqfl.ZPERSDATA_QFL;    
+    entity EHProfleQualifications as projection on empqfl.ZPERSDATA_QFL
+    { *,
+    pid as Pernr:String
+
+    };    
 }
