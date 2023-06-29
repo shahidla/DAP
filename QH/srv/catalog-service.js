@@ -15,33 +15,35 @@ module.exports = async (srv) => {
 
   // Profile Groups
   srv.on("READ", "QHProfileGroups", async (request) => {
-
+    var searchconditions = request.query.SELECT.search;
     if (request.params[0]) {
       const {
         PersonNumber,
         PersonnelAssignmentNumber
       } = await request
         .params[0];
-
+      
+      // 3rd page
       if (request.params[1]) {
         const {
           qualificationGroup
         } = await request
           .params[1];
 
-        const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
+        var QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
           .from("CatalogService.QHPersonProfleQualifications"
           ).where({
             pid: PersonNumber,
             qualificationGroup: qualificationGroup
           });
 
-        const EH_Qfl_Q = SELECT.from(
+        var EH_Qfl_Q = SELECT.from(
           "CatalogService.EHProfleQualifications"
         ).where({
           pid: PersonNumber,
           qualificationGroup: qualificationGroup
         });
+
         const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
         const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
 
@@ -59,17 +61,44 @@ module.exports = async (srv) => {
         res["$count"] = 1;
         return request.reply(res);
       };
-      const QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
+
+      // second page
+      var chk;
+
+      if (searchconditions) {
+        searchconditions.forEach((condition, index) => {
+          if (index === 0) {
+            chk = condition.val;
+          }
+        });
+      }
+
+      if (chk == undefined) {
+        chk = "";
+      }
+      var QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
         "CatalogService.QHPersonProfleQualifications"
       ).where({
         pid: PersonNumber
-      });
+      }).search(chk);             // search filter - second page - Stamp List Tab
 
-      const EH_Qfl_Q = SELECT.from(
+      var EH_Qfl_Q = SELECT.from(
         "CatalogService.EHProfleQualifications"
       ).where({
         pid: PersonNumber,
-      });
+      }).search(chk);
+      
+      // add additional conditions
+      if (searchconditions) {
+        searchconditions.forEach((condition, index) => {
+          if (index != 0) {
+            QH_Qfl_Q.SELECT.search.push(condition); 
+            EH_Qfl_Q.SELECT.search.push(condition);   
+            chk = "";
+          }
+        });
+      }
+
       if (request.params[1]) {
         var pid = request.params[1].pid;
         var qualificationGroup = request.params[1].qualificationGroup;
@@ -88,6 +117,18 @@ module.exports = async (srv) => {
 
         }
       }
+     
+      // // filter registration data from the stamp list tab
+      // try {
+      //   QH_Qfl_Res = QH_Qfl_Res.filter(function (ele) {
+      //     console.log(ele.qualificationGroup)
+      //     //return ele.qualificationGroup != "Registration";
+      //   });
+      // } catch (error) {
+      //   log.error("Error:", error);
+      //   throw error;
+      // }
+
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
     }
@@ -95,6 +136,23 @@ module.exports = async (srv) => {
   });
 
   srv.on("READ", "QHRePerProQualifications", async (request) => {
+    // Search Filters for second page - AHPRA Reg Tab
+    var searchconditions = request.query.SELECT.search;
+
+    var chk;
+
+    if (searchconditions) {
+      searchconditions.forEach((condition, index) => {
+        if (index === 0) {
+          chk = condition.val;
+        }
+      });
+    }
+
+    if (chk == undefined) {
+      chk = "";
+    }
+
     if (request.params[0]) {
       const {
         PersonNumber,
@@ -106,9 +164,17 @@ module.exports = async (srv) => {
         "CatalogService.QHPersonProfleQualifications"
       ).where({
         pid: PersonNumber
-      });
-
-
+      }).search(chk);
+      
+      // add additional conditions
+      if (searchconditions) {
+        searchconditions.forEach((condition, index) => {
+          if (index != 0) {
+            QH_Qfl_Q.SELECT.search.push(condition); 
+            chk = "";
+          }
+        });
+      }      
 
       var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
 
@@ -127,7 +193,9 @@ module.exports = async (srv) => {
     }
 
   });
+
   srv.on("READ", "QHPersonProfleQualifications", async (request) => {
+    var searchconditions = request.query.SELECT.search; //third page - qualification names tab
     var qc = {};
     if (request.params[0]) {
       const {
@@ -144,13 +212,38 @@ module.exports = async (srv) => {
         qc['qualificationGroup'] = qualificationGroup;
       }
 
-      const QH_Qfl_Q = SELECT.from(
-        "CatalogService.QHPersonProfleQualifications"
-      ).where(qc);
+      var chk;
 
-      const EH_Qfl_Q = SELECT.from(
+      if (searchconditions) {
+        searchconditions.forEach((condition, index) => {
+          if (index === 0) {
+            chk = condition.val;
+          }
+        });
+      }
+
+      if (chk == undefined) {
+        chk = "";
+      }
+
+      var QH_Qfl_Q = SELECT.from(
+        "CatalogService.QHPersonProfleQualifications"
+      ).where(qc).search(chk);
+
+      var EH_Qfl_Q = SELECT.from(
         "CatalogService.EHProfleQualifications"
-      ).where(qc);
+      ).where(qc).search(chk);
+      
+      // add additional conditions
+      if (searchconditions) {
+        searchconditions.forEach((condition, index) => {
+          if (index != 0) {
+            QH_Qfl_Q.SELECT.search.push(condition); //(sOperator, { val : chk} );
+            EH_Qfl_Q.SELECT.search.push(condition); //(sOperator, { val : chk} );
+            chk = "";
+          }
+        });
+      }
 
       const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
       const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
