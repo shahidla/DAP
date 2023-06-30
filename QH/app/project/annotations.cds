@@ -250,21 +250,21 @@ annotate service.QHPersonnelAssignments with {
     )
 };
 
+
 annotate service.QHPersonnelAssignments with {
     PersonNumber @(
         Common.ValueList               : {
             $Type         : 'Common.ValueListType',
-            CollectionPath: 'QHPersonnelAssignments',
+            CollectionPath: 'QHPersonIdentity',
             Parameters    : [{
                 $Type            : 'Common.ValueListParameterInOut',
                 LocalDataProperty: PersonNumber,
-                ValueListProperty: 'PersonNumber',
+                ValueListProperty: 'pid',
             }, ],
         },
         Common.ValueListWithFixedValues: true
     )
 };
-
 annotate service.QHPersonnelAssignments with {
     PersonnelAssignmentNumber @Common.Label: 'Personnel Assignment Number'
 };
