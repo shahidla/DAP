@@ -82,6 +82,13 @@ annotate service.QHPersonnelAssignments with @(
             Target: '@UI.FieldGroup#INFORMATION',
             Label : 'Contact',
         },
+
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'CRV',
+            Target: '@UI.FieldGroup#CRV',
+            Label : 'Citizenship/Residency/Visa',
+        },             
     ],
     UI.FieldGroup #INFORMATION: {
         $Type: 'UI.FieldGroupType',
@@ -632,6 +639,14 @@ annotate service.QHPersonnelAssignments with @(UI.FieldGroup #PersonlID: {
     Data : [{
         $Type: 'UI.DataField',
         Value: Pernr,
+    }, ],
+});
+
+annotate service.QHPersonnelAssignments with @(UI.FieldGroup #CRV: {
+    $Type: 'UI.FieldGroupType',
+    Data : [{
+        $Type: 'UI.DataField',
+        Value: ProContact.Residencystatus,
     }, ],
 });
 

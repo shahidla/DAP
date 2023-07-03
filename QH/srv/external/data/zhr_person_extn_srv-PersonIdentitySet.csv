@@ -1,9 +1,9 @@
-pid,email,mobilePhone,workPhone,has100PointsId,isCitizen,isResident
-10000001,shahid@sap.com,0451700001,87001001,Y,Y,Y
-10000002,kerry@sap.com,0451700002,87001002,Y,Y,Y
-10000003,alan@sap.com,0451700003,87001003,Y,Y,Y
-10000004,paul@sap.com,0451700004,87001004,Y,Y,Y
-10000005,daniel@sap.com,0451700005,87001005,Y,Y,Y
-10000006,james@sap.com,0451700006,87001006,Y,Y,Y
-10000007,mauricio@sap.com,0451700007,87001007,Y,Y,Y
-00250002,brent@qh.com,0451700008,87001008,Y,Y,Y
+pid,email,mobilePhone,workPhone,has100PointsId,isCitizen,isResident,Residencystatus,Firstname,Lastname,Personfullname
+10000001,Jamesblunt@sap.com,0451700001,87001001,Y,Y,Y,Citizen,James,Blunt,James Blunt
+10000002,Jerry@sap.com,0451700002,87001002,Y,Y,Y,Citizen,James,Jerry,James Jerry,
+10000003,alan@sap.com,0451700003,87001003,Y,Y,Y,Citizen,Alan,Bevan,Alan Bevan,
+10000004,paul@sap.com,0451700004,87001004,Y,Y,Y,Citizen,Paul,Wooton,Paul Wooton,
+10000005,daniel@sap.co  m,0451700005,87001005,Y,Y,Y,Citizen,Daniel,Dagan,Daniel Dagan,
+10000006,james@sap.com,0451700006,87001006,Y,Y,Y,Citizen,James,Caston,James Caston,
+10000007,mauricio@sap.com,0451700007,87001007,Y,Y,Y,Citizen,Mauricio,Lauffer,Mauricio Lauffer,
+00250002,brent@qh.com,0451700008,87001008,Y,Y,Y,Citizen,Brent,Radford,Brent Radford,

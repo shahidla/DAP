@@ -191,7 +191,7 @@
       "elements": {
         "PersonNumber": {
           "key": true,
-          "type": "cds.String",
+          "type": "cds.Integer64",
           "@sap.unicode": "false",
           "@sap.label": "Personnel No.",
           "@sap.creatable": "false",
@@ -270,7 +270,7 @@
       "elements": {
         "PersonNumber": {
           "key": true,
-          "type": "cds.String",
+          "type": "cds.Integer64",
           "@sap.unicode": "false",
           "@sap.label": "Personnel No.",
           "@sap.creatable": "false",
@@ -468,26 +468,26 @@
             {
               "ref": [
                 "PositionNavn",
-                "PersonNumber"
+                "PersonnelAssignmentNumber"
               ]
             },
             "=",
             {
               "ref": [
-                "PersonNumber"
+                "PersonnelAssignmentNumber"
               ]
             },
             "and",
             {
               "ref": [
                 "PositionNavn",
-                "PersonnelAssignmentNumber"
+                "PersonNumber"
               ]
             },
             "=",
             {
               "ref": [
-                "PersonnelAssignmentNumber"
+                "PersonNumber"
               ]
             }
           ]
@@ -503,19 +503,6 @@
             {
               "ref": [
                 "PersonProfileAssignmentsSet",
-                "pid"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "PersonNumber"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PersonProfileAssignmentsSet",
                 "pan"
               ]
             },
@@ -523,6 +510,19 @@
             {
               "ref": [
                 "PersonnelAssignmentNumber"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PersonProfileAssignmentsSet",
+                "pid"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "PersonNumber"
               ]
             }
           ]
@@ -538,19 +538,6 @@
             {
               "ref": [
                 "PersonProfileTaskSet",
-                "pid"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "PersonNumber"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PersonProfileTaskSet",
                 "pan"
               ]
             },
@@ -558,6 +545,19 @@
             {
               "ref": [
                 "PersonnelAssignmentNumber"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PersonProfileTaskSet",
+                "pid"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "PersonNumber"
               ]
             }
           ]
@@ -573,19 +573,6 @@
             {
               "ref": [
                 "PersonProfleQualificationsSet",
-                "pid"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "PersonNumber"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PersonProfleQualificationsSet",
                 "pan"
               ]
             },
@@ -593,6 +580,19 @@
             {
               "ref": [
                 "PersonnelAssignmentNumber"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PersonProfleQualificationsSet",
+                "pid"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "PersonNumber"
               ]
             }
           ]
@@ -608,19 +608,6 @@
             {
               "ref": [
                 "PersonProfileAllowsSet",
-                "pan"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "PersonnelAssignmentNumber"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PersonProfileAllowsSet",
                 "pid"
               ]
             },
@@ -628,6 +615,19 @@
             {
               "ref": [
                 "PersonNumber"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PersonProfileAllowsSet",
+                "pan"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "PersonnelAssignmentNumber"
               ]
             }
           ]
@@ -643,19 +643,6 @@
             {
               "ref": [
                 "PersonProfileAwardsSet",
-                "pan"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "PersonnelAssignmentNumber"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PersonProfileAwardsSet",
                 "pid"
               ]
             },
@@ -663,6 +650,19 @@
             {
               "ref": [
                 "PersonNumber"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PersonProfileAwardsSet",
+                "pan"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "PersonnelAssignmentNumber"
               ]
             }
           ]
@@ -672,7 +672,10 @@
         "DefaultPersonDetails": {
           "kind": "function",
           "params": {
-            "UserId": {
+            "Role": {
+              "type": "cds.LargeString"
+            },
+            "MovementType": {
               "type": "cds.LargeString"
             },
             "PeriodStart": {
@@ -680,10 +683,7 @@
               "@odata.Type": "Edm.DateTimeOffset",
               "@sap.label": "Time Stamp"
             },
-            "MovementType": {
-              "type": "cds.LargeString"
-            },
-            "Role": {
+            "UserId": {
               "type": "cds.LargeString"
             }
           },
@@ -727,18 +727,15 @@
           "@sap.filterable": "false",
           "notNull": true
         },
-        "PersonnelAssignmentsNavn": {
+        "PersonIdentity": {
           "@cds.ambiguous": "missing on condition?",
           "type": "cds.Association",
-          "target": "zhr_person_extn_srv.PersonnelAssignmentsSet",
-          "cardinality": {
-            "max": "*"
-          },
+          "target": "zhr_person_extn_srv.PersonIdentitySet",
           "on": [
             {
               "ref": [
-                "PersonnelAssignmentsNavn",
-                "PersonNumber"
+                "PersonIdentity",
+                "pid"
               ]
             },
             "=",
@@ -771,15 +768,18 @@
             }
           ]
         },
-        "PersonIdentity": {
+        "PersonnelAssignmentsNavn": {
           "@cds.ambiguous": "missing on condition?",
           "type": "cds.Association",
-          "target": "zhr_person_extn_srv.PersonIdentitySet",
+          "target": "zhr_person_extn_srv.PersonnelAssignmentsSet",
+          "cardinality": {
+            "max": "*"
+          },
           "on": [
             {
               "ref": [
-                "PersonIdentity",
-                "pid"
+                "PersonnelAssignmentsNavn",
+                "PersonNumber"
               ]
             },
             "=",
@@ -795,14 +795,14 @@
         "GetPerson": {
           "kind": "function",
           "params": {
-            "PersonId": {
-              "type": "cds.Integer",
-              "@sap.label": "Person ID"
-            },
             "PeriodStart": {
               "type": "cds.DateTime",
               "@odata.Type": "Edm.DateTimeOffset",
               "@sap.label": "Period Start"
+            },
+            "PersonId": {
+              "type": "cds.Integer",
+              "@sap.label": "Person ID"
             }
           },
           "returns": {
@@ -814,18 +814,18 @@
         "ValidateOwnPerson": {
           "kind": "function",
           "params": {
-            "Role": {
-              "type": "cds.LargeString",
-              "@sap.label": "Role"
+            "PeriodStart": {
+              "type": "cds.DateTime",
+              "@odata.Type": "Edm.DateTimeOffset",
+              "@sap.label": "Period Start"
             },
             "PersonId": {
               "type": "cds.Integer",
               "@sap.label": "Person ID"
             },
-            "PeriodStart": {
-              "type": "cds.DateTime",
-              "@odata.Type": "Edm.DateTimeOffset",
-              "@sap.label": "Period Start"
+            "Role": {
+              "type": "cds.LargeString",
+              "@sap.label": "Role"
             }
           },
           "returns": {
@@ -837,22 +837,22 @@
         "ValidatePerson": {
           "kind": "function",
           "params": {
-            "PeriodStart": {
-              "type": "cds.DateTime",
-              "@odata.Type": "Edm.DateTimeOffset",
-              "@sap.label": "Period Start"
-            },
-            "PersonId": {
-              "type": "cds.Integer",
-              "@sap.label": "Person ID"
+            "Role": {
+              "type": "cds.LargeString",
+              "@sap.label": "Role"
             },
             "Appname": {
               "type": "cds.LargeString",
               "@sap.label": "Application Name"
             },
-            "Role": {
-              "type": "cds.LargeString",
-              "@sap.label": "Role"
+            "PersonId": {
+              "type": "cds.Integer",
+              "@sap.label": "Person ID"
+            },
+            "PeriodStart": {
+              "type": "cds.DateTime",
+              "@odata.Type": "Edm.DateTimeOffset",
+              "@sap.label": "Period Start"
             }
           },
           "returns": {
@@ -1718,6 +1718,204 @@
           "@sap.updatable": "false",
           "@sap.sortable": "false",
           "@sap.filterable": "false"
+        },
+        "Residencystatus": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.label": "Citizenship/Residency/Visa",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "Firstname": {
+          "type": "cds.String",
+          "length": 85,
+          "@sap.label": "First Name (Preffered Name)",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "Lastname": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Last name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "Personfullname": {
+          "type": "cds.String",
+          "length": 125,
+          "@sap.label": "Person name (with Preffered Name)",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        }
+      }
+    },
+    "zhr_person_extn_srv.PersonPredictSearchSet": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.pageable": "false",
+      "@sap.addressable": "false",
+      "@sap.content.version": "1",
+      "elements": {
+        "PersonnelAssignmentNumber": {
+          "key": true,
+          "type": "cds.Integer64",
+          "@sap.label": "Personnel No.",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "PersonID": {
+          "type": "cds.Integer64",
+          "@sap.label": "Person Number",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "FirstName": {
+          "type": "cds.String",
+          "length": 85,
+          "@sap.label": "First Name (Preffered Name)",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "LastName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Last name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "FullName": {
+          "type": "cds.String",
+          "length": 125,
+          "@sap.label": "Full Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "PositionID": {
+          "type": "cds.Integer64",
+          "@sap.label": "Position",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "PositionName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "OrgUnitID": {
+          "type": "cds.Integer64",
+          "@sap.label": "Org. Unit",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "OrgUnitName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "AHPRA": {
+          "type": "cds.String",
+          "length": 60,
+          "@sap.label": "AHPRA",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        }
+      },
+      "actions": {
+        "GetPersonPredict": {
+          "kind": "function",
+          "params": {
+            "SearchString": {
+              "type": "cds.LargeString",
+              "@sap.label": "Search string"
+            },
+            "PersonID": {
+              "type": "cds.Integer",
+              "@sap.label": "Person ID"
+            },
+            "FirstName": {
+              "type": "cds.String",
+              "length": 85,
+              "@sap.label": "First name"
+            },
+            "LastName": {
+              "type": "cds.String",
+              "length": 40,
+              "@sap.label": "Last Name"
+            },
+            "FullName": {
+              "type": "cds.String",
+              "length": 125,
+              "@sap.label": "Full name"
+            },
+            "AHPRA": {
+              "type": "cds.LargeString",
+              "@sap.label": "AHPRA"
+            },
+            "top": {
+              "type": "cds.Integer",
+              "@sap.label": "top"
+            },
+            "skip": {
+              "type": "cds.Integer",
+              "@sap.label": "skip"
+            }
+          },
+          "returns": {
+            "items": {
+              "type": "zhr_person_extn_srv.PersonPredictSearchSet"
+            }
+          }
         }
       }
     }
