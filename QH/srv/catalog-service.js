@@ -3,6 +3,18 @@ const cds = require("@sap/cds");
 module.exports = async (srv) => {
   const QHService = await cds.connect.to("zhr_person_extn_srv");
   const EHService = await cds.connect.to("empqfl");
+  const stampList = [{
+      value: "Credentail Data",
+      key: "Credentail"
+    },
+    {
+      value: "Traning Data",
+      key: "Traning"
+    }, {
+      value: "Other HR data",
+      key: "HRData"
+    }
+  ]
   const {
     QHPersonIdentity,
     QHPersonnelAssignments,
@@ -16,6 +28,7 @@ module.exports = async (srv) => {
   // Profile Groups
   srv.on("READ", "QHProfileGroups", async (request) => {
     var searchconditions = request.query.SELECT.search;
+    var result;
     if (request.params[0]) {
       const {
         PersonNumber,
@@ -29,35 +42,34 @@ module.exports = async (srv) => {
           qualificationGroup
         } = await request
           .params[1];
-
-        var QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`
-          .from("CatalogService.QHPersonProfleQualifications"
-          ).where({
+        result = stampList.filter(ele => {
+          return ele.key == qualificationGroup
+        }).map(ele => {
+          return {
             pid: PersonNumber,
-            qualificationGroup: qualificationGroup
-          });
-
-        var EH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
-          "CatalogService.EHProfleQualifications"
-        ).where({
-          pid: PersonNumber,
-          qualificationGroup: qualificationGroup
-        });
-
-        const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-        const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-
-        if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
-          for (var i = 0; i < EH_Qfl_Res.length; i++) {
-
-            QH_Qfl_Res.push({
-              pid: EH_Qfl_Res[i].pid,
-              qualificationGroup: EH_Qfl_Res[i].qualificationGroup
-            });
-
+            qualificationGroup: ele.key,
+            qualificationGroupDes: ele.value
           }
+        })
+        //different stamps from different api 
+        if (qualificationGroup == 'HRData') {
+          result[0]['showt1'] = false;
+          result[0]['showt2'] = true;
+          result[0]['showt3'] = true;
+        
+        }else if(qualificationGroup == 'Credentail') {
+          result[0]['showt1'] = true;
+          result[0]['showt2'] = false;
+          result[0]['showt3'] = true;
+        
+        }else if(qualificationGroup == 'Traning') {
+          result[0]['showt1'] = true;
+          result[0]['showt2'] = true;
+          result[0]['showt3'] = false;
+        
         }
-        var res = QH_Qfl_Res[0]
+        console.log()
+        var res = result[0]
         res["$count"] = 1;
         return request.reply(res);
       };
@@ -76,13 +88,13 @@ module.exports = async (srv) => {
       if (chk == undefined) {
         chk = "";
       }
-      var QH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
+      var QH_Qfl_Q = SELECT.distinct `pid, qualificationGroup`.from(
         "CatalogService.QHPersonProfleQualifications"
       ).where({
         pid: PersonNumber
-      }).search(chk);             // search filter - second page - Stamp List Tab
+      }).search(chk); // search filter - second page - Stamp List Tab
 
-      var EH_Qfl_Q = SELECT.distinct`pid, qualificationGroup`.from(
+      var EH_Qfl_Q = SELECT.distinct `pid, qualificationGroup`.from(
         "CatalogService.EHProfleQualifications"
       ).where({
         pid: PersonNumber,
@@ -99,34 +111,41 @@ module.exports = async (srv) => {
         });
       }
 
-      if (request.params[1]) {
-        var pid = request.params[1].pid;
-        var qualificationGroup = request.params[1].qualificationGroup;
+      // if (request.params[1]) {
+      //   var pid = request.params[1].pid;
+      //   var qualificationGroup = request.params[1].qualificationGroup;
 
-      };
-      var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-      var EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
-
-      if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
-        for (var i = 0; i < EH_Qfl_Res.length; i++) {
-
-          QH_Qfl_Res.push({
-            pid: EH_Qfl_Res[i].pid,
-            qualificationGroup: EH_Qfl_Res[i].qualificationGroup
-          });
-
-        }
+      // };
+      //var QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
+      //var EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
+      var QH_Qfl_Res = [];
+      for (var i = 0; i < stampList.length; i++) {
+        QH_Qfl_Res.push({
+          qualificationGroup: stampList[i].key,
+          qualificationGroupDes: stampList[i].value,
+          pid: PersonNumber
+        })
       }
+      // if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
+      //   for (var i = 0; i < EH_Qfl_Res.length; i++) {
+
+      //     QH_Qfl_Res.push({
+      //       pid: EH_Qfl_Res[i].pid,
+      //       qualificationGroup: EH_Qfl_Res[i].qualificationGroup
+      //     });
+
+      //   }
+      // }
 
       // filter registration data from the stamp list tab
-      try {
-        QH_Qfl_Res = QH_Qfl_Res.filter(function (elem) {
-          return elem.qualificationGroup != "Registration";
-        });
-      } catch (error) {
-        log.error("Error:", error);
-        throw error;
-      }
+      // try {
+      //   QH_Qfl_Res = QH_Qfl_Res.filter(function (elem) {
+      //     return elem.qualificationGroup != "Registration";
+      //   });
+      // } catch (error) {
+      //   log.error("Error:", error);
+      //   throw error;
+      // }
 
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
@@ -208,7 +227,10 @@ module.exports = async (srv) => {
           qualificationGroup
         } = await request
           .params[1];
-        qc['qualificationGroup'] = qualificationGroup;
+        if (qualificationGroup == 'HRData') {
+          qc['qualificationGroup'] = 'Vaccinations';
+        }
+
       }
 
       var chk;
@@ -245,30 +267,100 @@ module.exports = async (srv) => {
       }
 
       const QH_Qfl_Res = await cds.run(QH_Qfl_Q); // first odata result
-      const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
+      //const EH_Qfl_Res = await cds.run(EH_Qfl_Q); // second odata result
 
-      if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
-        for (var i = 0; i < EH_Qfl_Res.length; i++) {
+      // if (EH_Qfl_Res && EH_Qfl_Res.length > 0) {
+      //   for (var i = 0; i < EH_Qfl_Res.length; i++) {
 
-          QH_Qfl_Res.push({
-            pid: EH_Qfl_Res[i].pid,
-            pan: EH_Qfl_Res[i].pan,
-            positionId: EH_Qfl_Res[i].positionId,
-            qualificationGroup: EH_Qfl_Res[i].qualificationGroup,
-            qualificationName: EH_Qfl_Res[i].qualificationName,
-            referenceNumber: EH_Qfl_Res[i].referenceNumber,
-            Pernr: EH_Qfl_Res[i].pid,
-            requiringPositionTitle: EH_Qfl_Res[i].requiringPositionTitle,
-            empQualficationStart: EH_Qfl_Res[i].empQualficationStart,
-            empQualifictionEnd: EH_Qfl_Res[i].empQualifictionEnd
-          });
+      //     QH_Qfl_Res.push({
+      //       pid: EH_Qfl_Res[i].pid,
+      //       pan: EH_Qfl_Res[i].pan,
+      //       positionId: EH_Qfl_Res[i].positionId,
+      //       qualificationGroup: EH_Qfl_Res[i].qualificationGroup,
+      //       qualificationName: EH_Qfl_Res[i].qualificationName,
+      //       referenceNumber: EH_Qfl_Res[i].referenceNumber,
+      //       Pernr: EH_Qfl_Res[i].pid,
+      //       requiringPositionTitle: EH_Qfl_Res[i].requiringPositionTitle,
+      //       empQualficationStart: EH_Qfl_Res[i].empQualficationStart,
+      //       empQualifictionEnd: EH_Qfl_Res[i].empQualifictionEnd
+      //     });
 
-        }
-      }
+      //   }
+      // }
       QH_Qfl_Res["$count"] = QH_Qfl_Res.length;
       request.reply(QH_Qfl_Res);
     }
 
   });
+  // Training
 
+  srv.on("READ", "EHTraining", async (request) => {
+    
+    var res = [];
+
+    res = [{
+      pid: '00250005',
+
+      CourseID: 'CID12',
+
+      CourseName: 'Anatomy',
+
+      G6CourseEquivalent: 'Yes',
+
+      HHSCompleted: 'Yes',
+
+      CompletionDate: '03-07-2023',
+
+      ExpiryDate: '03-07-2025'
+
+    }]
+
+
+
+    res["$count"] = res.length;
+
+    return request.reply(res);
+
+  })
+
+
+
+
+  // Credentialling
+
+  srv.on("READ", "EHCredentialling", async (request) => {
+
+    var res = [];
+
+    res = [{
+      pid: '00250005',
+
+      HHS: 'HSS1',
+
+      AHPRANumber: 'AHPRA-MED45',
+
+      ScopePracticeType: 'Interim',
+
+      ScopePracticeStatus: 'Approved',
+
+      ApprovedScopePractice: 'Yes',
+
+      SubSpecialty: 'ENT',
+
+      ScopePracticeStartDate: '02-07-2023',
+
+      ScopePracticeExpiryDate: '01-07-2025',
+
+      ScopePracticeConditions: 'None',
+
+      RequiredSupervisionRequirements: 'None'
+    }]
+
+
+
+    res["$count"] = res.length;
+
+    return request.reply(res);
+
+  })
 };

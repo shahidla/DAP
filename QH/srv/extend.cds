@@ -11,8 +11,10 @@ extend projection CatalogService.QHPersonnelAssignments with {
 
 extend entity CatalogService.QHProfileGroups with {
  
-
   ProfileNames : Association to many CatalogService.QHPersonProfleQualifications
-                   on ProfileNames.pid = pid
-
+                   on ProfileNames.pid = pid;
+  EHCredentialling: Association to many CatalogService.EHCredentialling
+                   on EHCredentialling.pid = pid;
+  EHTraining      :  Association to many CatalogService.EHTraining
+                   on EHTraining.pid = pid;
 }

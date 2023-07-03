@@ -141,6 +141,7 @@
                                 "ProfileGroups": {
                                     "detail": {
                                         "route": "QHPersonnelAssignments_ProfileGroupsObjectPage"
+                                        
                                     }
                                 }
                             },
@@ -171,6 +172,20 @@
                                             "availability": "Hidden"
                                         }
                                     }
+                                },
+                                "ProPositions/@com.sap.vocabularies.UI.v1.LineItem#OrgData": {
+                                    "columns": {
+                                        "DataField::PersonNumber": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
+                                },
+                                "ReProfile/@com.sap.vocabularies.UI.v1.LineItem#Registration": {
+                                    "columns": {
+                                        "DataField::pid": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -184,7 +199,16 @@
                         "settings": {
                             "contextPath": "/QHPersonnelAssignments/ProfileGroups",
                             "navigation": {},
-                            "showBreadCrumbs": false
+                            "showBreadCrumbs": false,
+                            "controlConfiguration": {
+                                "ProfileNames/@com.sap.vocabularies.UI.v1.LineItem#test": {
+                                    "columns": {
+                                        "DataField::Pernr": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -192,7 +216,9 @@
         },
         "extends": {
             "extensions": {
-                "sap.ui.controllerExtensions": {}
+                "sap.ui.controllerExtensions": {
+                    
+                }
             }
         }
     },
