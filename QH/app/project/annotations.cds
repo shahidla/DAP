@@ -473,6 +473,56 @@ annotate service.EHCredentialling with @(UI.LineItem #Credentialling: [{
     Value: pid,
     Label: 'Person ID',
 },
+    {
+        $Type : 'UI.DataField',
+        Value : AHPRANumber,
+        Label : 'AHPRA Number',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ApprovedScopePractice,
+        Label : 'Approved Scope Practice',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : HHS,
+        Label : 'HHS',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : RequiredSupervisionRequirements,
+        Label : 'Required Supervision Requirements',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ScopePracticeConditions,
+        Label : 'Scope Practice Conditions',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ScopePracticeExpiryDate,
+        Label : 'Scope Practice Expiry Date',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ScopePracticeStartDate,
+        Label : 'Scope Practice Start Date',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ScopePracticeStatus,
+        Label : 'Scope Practice Status',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ScopePracticeType,
+        Label : 'Scope Practice Type',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : SubSpecialty,
+        Label : 'Sub Specialty',
+    },
 
 ]);
 annotate service.EHTraining with @(UI.LineItem #EHTraining: [{
@@ -480,6 +530,36 @@ annotate service.EHTraining with @(UI.LineItem #EHTraining: [{
     Value: pid,
     Label: 'Person ID',
 },
+    {
+        $Type : 'UI.DataField',
+        Value : CompletionDate,
+        Label : 'Completion Date',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : CourseID,
+        Label : 'Course ID',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : CourseName,
+        Label : 'Course Name',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : ExpiryDate,
+        Label : 'Expiry Date',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : G6CourseEquivalent,
+        Label : 'G6 Course Equivalent',
+    },
+    {
+        $Type : 'UI.DataField',
+        Value : HHSCompleted,
+        Label : 'HHS Completed',
+    },
 
 ]);
 annotate service.QHProfileGroups with @(UI.Facets: [
