@@ -14,6 +14,7 @@ annotate service.QHPersonnelAssignments with @(UI.LineItem: [
     {
         $Type: 'UI.DataField',
         Value: PersonFullName,
+        Label: 'Full Name',
     },
     {
         $Type: 'UI.DataField',
