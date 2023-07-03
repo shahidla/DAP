@@ -2,7 +2,7 @@ const cds = require("@sap/cds");
 
 module.exports = async (srv) => {
   const QHService = await cds.connect.to("zhr_person_extn_srv");
-  const EHService = await cds.connect.to("empqfl");
+  //const EHService = await cds.connect.to("empqfl");
   const stampList = [{
       value: "Credentail Data",
       key: "Credentail"
@@ -21,9 +21,10 @@ module.exports = async (srv) => {
     QHPersonProfleQualifications,
     QHRePerProQualifications
   } = QHService.entities("CatalogService");
-  const {
-    EHPersonProfleQualifications
-  } = EHService.entities("CatalogService");
+
+  // const {
+  //   EHPersonProfleQualifications
+  // } = EHService.entities("CatalogService");
 
   // Profile Groups
   srv.on("READ", "QHProfileGroups", async (request) => {
@@ -94,18 +95,18 @@ module.exports = async (srv) => {
         pid: PersonNumber
       }).search(chk); // search filter - second page - Stamp List Tab
 
-      var EH_Qfl_Q = SELECT.distinct `pid, qualificationGroup`.from(
-        "CatalogService.EHProfleQualifications"
-      ).where({
-        pid: PersonNumber,
-      }).search(chk);
+      // var EH_Qfl_Q = SELECT.distinct `pid, qualificationGroup`.from(
+      //   "CatalogService.EHProfleQualifications"
+      // ).where({
+      //   pid: PersonNumber,
+      // }).search(chk);
 
       // add additional conditions
       if (searchconditions) {
         searchconditions.forEach((condition, index) => {
           if (index != 0) {
             QH_Qfl_Q.SELECT.search.push(condition);
-            EH_Qfl_Q.SELECT.search.push(condition);
+           // EH_Qfl_Q.SELECT.search.push(condition);
             chk = "";
           }
         });
@@ -251,16 +252,16 @@ module.exports = async (srv) => {
         "CatalogService.QHPersonProfleQualifications"
       ).where(qc).search(chk);
 
-      var EH_Qfl_Q = SELECT.from(
-        "CatalogService.EHProfleQualifications"
-      ).where(qc).search(chk);
+      // var EH_Qfl_Q = SELECT.from(
+      //   "CatalogService.EHProfleQualifications"
+      // ).where(qc).search(chk);
 
       // add additional conditions
       if (searchconditions) {
         searchconditions.forEach((condition, index) => {
           if (index != 0) {
             QH_Qfl_Q.SELECT.search.push(condition); //(sOperator, { val : chk} );
-            EH_Qfl_Q.SELECT.search.push(condition); //(sOperator, { val : chk} );
+       //     EH_Qfl_Q.SELECT.search.push(condition); //(sOperator, { val : chk} );
             chk = "";
           }
         });

@@ -125,6 +125,7 @@ annotate service.QHPersonnelAssignments with @(Communication.Contact: {
 
     fn   : PersonFullName,
     kind : #individual,
+    
     tel  : [
         {
             type: #cell,
@@ -390,8 +391,13 @@ annotate service.QHRePerProQualifications with @(UI.LineItem #Registration: [
     {
         $Type: 'UI.DataField',
         Value: requiringPositionTitle,
-        Label: 'Position Title',
+        Label: 'Requiring Position Title',
     },
+    {
+        $Type: 'UI.DataField',
+        Value: ratingText,
+        Label: 'Position Requirement',
+    },    
 ]);
 
 
@@ -471,8 +477,13 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #test: [
     {
         $Type: 'UI.DataField',
         Value: requiringPositionTitle,
-        Label: 'Position Title',
+        Label: 'Requiring Position Title',
     },
+    {
+        $Type: 'UI.DataField',
+        Value: ratingText,
+        Label: 'Position Requirement',
+    },        
 ]);
 
 annotate service.EHCredentialling with @(UI.LineItem #Credentialling: [{

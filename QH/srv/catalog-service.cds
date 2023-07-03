@@ -44,7 +44,8 @@ service CatalogService {
             requiringPositionTitle,
             empQualficationStart : DateTime,
             empQualifictionEnd   : DateTime,
-            pid as Pernr         : String
+            pid as Pernr         : String,
+            ratingText: String
     };
 
     @readonly
@@ -59,6 +60,7 @@ service CatalogService {
             requiringPositionTitle : String;
             empQualficationStart   : DateTime;
             empQualifictionEnd     : DateTime;
+            ratingText: String
     };
 
     @readonly
