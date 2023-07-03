@@ -56,17 +56,17 @@ module.exports = async (srv) => {
           result[0]['showt1'] = false;
           result[0]['showt2'] = true;
           result[0]['showt3'] = true;
-        
-        }else if(qualificationGroup == 'Credentail') {
+
+        } else if (qualificationGroup == 'Credentail') {
           result[0]['showt1'] = true;
           result[0]['showt2'] = false;
           result[0]['showt3'] = true;
-        
-        }else if(qualificationGroup == 'Traning') {
+
+        } else if (qualificationGroup == 'Traning') {
           result[0]['showt1'] = true;
           result[0]['showt2'] = true;
           result[0]['showt3'] = false;
-        
+
         }
         console.log()
         var res = result[0]
@@ -295,7 +295,7 @@ module.exports = async (srv) => {
   // Training
 
   srv.on("READ", "EHTraining", async (request) => {
-    
+
     var res = [];
 
     res = [{
@@ -313,14 +313,36 @@ module.exports = async (srv) => {
 
       ExpiryDate: '03-07-2025'
 
+    }, {
+      pid: '250002',
+
+      CourseID: 'CID12',
+
+      CourseName: 'Anatomy',
+
+      G6CourseEquivalent: 'Yes',
+
+      HHSCompleted: 'Yes',
+
+      CompletionDate: '03-07-2023',
+
+      ExpiryDate: '03-07-2025'
+
     }]
+    if (request.params[0]) {
+      const {
+        PersonNumber
+      } = await request
+        .params[0];
 
 
+      res = res.filter(ele => {
+        return ele.pid == PersonNumber
+      })
+      res["$count"] = res.length;
 
-    res["$count"] = res.length;
-
-    return request.reply(res);
-
+      return request.reply(res);
+    }
   })
 
 
@@ -355,12 +377,18 @@ module.exports = async (srv) => {
 
       RequiredSupervisionRequirements: 'None'
     }]
+    if (request.params[0]) {
+      const {
+        PersonNumber
+      } = await request
+        .params[0];
+        res = res.filter(ele=>{
+          return ele.pid == PersonNumber
+        })
 
+      res["$count"] = res.length;
 
-
-    res["$count"] = res.length;
-
-    return request.reply(res);
-
+      return request.reply(res);
+    }
   })
 };
