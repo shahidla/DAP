@@ -300,22 +300,7 @@ module.exports = async (srv) => {
     var res = [];
 
     res = [{
-      pid: '00250005',
-
-      CourseID: 'CID12',
-
-      CourseName: 'Anatomy',
-
-      G6CourseEquivalent: 'Yes',
-
-      HHSCompleted: 'Yes',
-
-      CompletionDate: '03-07-2023',
-
-      ExpiryDate: '03-07-2025'
-
-    }, {
-      pid: '250002',
+      pid: '00250002',
 
       CourseID: 'CID12',
 
@@ -356,7 +341,7 @@ module.exports = async (srv) => {
     var res = [];
 
     res = [{
-      pid: '00250005',
+      pid: '00250002',
 
       HHS: 'HSS1',
 
