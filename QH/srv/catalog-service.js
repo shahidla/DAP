@@ -11,7 +11,7 @@ module.exports = async (srv) => {
       value: "Traning Data",
       key: "Traning"
     }, {
-      value: "Other HR data",
+      value: "HR Details",
       key: "HRData"
     }
   ]
@@ -153,7 +153,15 @@ module.exports = async (srv) => {
     }
 
   });
+  srv.on("READ", "QHPersonnelAssignments", async (request) => {
+    console.log("This is a test1");
 
+    //const EHService = await cds.connect.to('eHealthApi');
+      console.log("This is a test2");
+     // var result = await EHService.run(request.query);
+     //console.log(result);
+    return res = await QHService.run(request.query)
+  })
   srv.on("READ", "QHRePerProQualifications", async (request) => {
     // Search Filters for second page - AHPRA Reg Tab
     var searchconditions = request.query.SELECT.search;
