@@ -11,7 +11,7 @@ module.exports = async (srv) => {
       value: "Traning Data",
       key: "Traning"
     }, {
-      value: "Other HR data",
+      value: "HR Details",
       key: "HRData"
     }
   ]
