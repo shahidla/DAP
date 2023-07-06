@@ -4,11 +4,11 @@ module.exports = async (srv) => {
   const QHService = await cds.connect.to("zhr_person_extn_srv");
   //const EHService = await cds.connect.to("empqfl");
   const stampList = [{
-      value: "Credentail Data",
+      value: "Credentialling" ,
       key: "Credentail"
     },
     {
-      value: "Traning Data",
+      value: "Mandatory Training",
       key: "Traning"
     }, {
       value: "HR Details",

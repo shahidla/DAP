@@ -64,39 +64,42 @@ annotate service.QHPersonnelAssignments with @(UI.LineItem: [
 
 ]);
 
-
 annotate service.QHPersonProfleQualifications with {
     referenceNumber @Common.Label: 'AHPRA Registration Number'
 };
 
 annotate service.QHPersonnelAssignments with @(
     UI.HeaderInfo             : {
-        // $Type : 'UI.HeaderInfoType',
-        TypeName      : 'Person ID',
-        TypeNamePlural: 'Person ID',
-        Title         : {Value: PersonNumber}
-        // Description   : {Value: PersonFullName}
+        $Type         : 'UI.HeaderInfoType',
+        TypeName      : '',
+        TypeNamePlural: '',
+        Title         : {Value: PersonNumber},
+        Description   : {
+            $Type: 'UI.DataField',
+            Value: 'Person ID',
+        }
+    // Description   : {Value: PersonFullName}
     },
     UI.HeaderFacets           : [
-        // {
-        //     $Type : 'UI.ReferenceFacet',
-        //     Label : 'Person ID',
-        //     ID    : 'PersonID',
-        //     Target: '@UI.FieldGroup#PersonID',
-        // },
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID    : 'INFORMATION',
-            Target: '@UI.FieldGroup#INFORMATION',
-            Label : 'Contact',
-        },
+                                 // {
+                                 //     $Type : 'UI.ReferenceFacet',
+                                 //     Label : 'Person ID',
+                                 //     ID    : 'PersonID',
+                                 //     Target: '@UI.FieldGroup#PersonID',
+                                 // },
+                                {
+        $Type : 'UI.ReferenceFacet',
+        ID    : 'INFORMATION',
+        Target: '@UI.FieldGroup#INFORMATION',
+        Label : 'Contact',
+    },
 
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID    : 'CRV',
-            Target: '@UI.FieldGroup#CRV',
-            Label : 'Citizenship/Residency/Visa',
-        },
+    // {
+    //     $Type : 'UI.ReferenceFacet',
+    //     ID    : 'CRV',
+    //     Target: '@UI.FieldGroup#CRV',
+    //     Label : 'Citizenship/Residency/Visa',
+    // },
     ],
     UI.FieldGroup #INFORMATION: {
         $Type: 'UI.FieldGroupType',
@@ -412,27 +415,30 @@ annotate service.QHRePerProQualifications with @(UI.LineItem #Registration: [
 
 annotate service.QHProfileGroups with @(
 
-    UI.HeaderInfo             : {
+    UI.HeaderInfo              : {
         // $Type : 'UI.HeaderInfoType',
-        TypeName      : 'Person ID',
-        TypeNamePlural: 'Person ID',
-        Title         : {Value: pid}
-        // Description   : {Value: pid}
+        TypeName      : '',
+        TypeNamePlural: '',
+        Title         : {Value: pid},
+        Description   : {
+            $Type: 'UI.DataField',
+            Value: 'Person ID',
+        }
+    // Description   : {Value: pid}
     },
 
-    UI.HeaderFacets            : [
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : 'Type of Stamps',
-            ID    : 'TypeofStamps',
-            Target: '@UI.FieldGroup#TypeofStamps',
-        }
-        // {
-        //     $Type : 'UI.ReferenceFacet',
-        //     Label : 'Person ID',
-        //     ID    : 'PersonID',
-        //     Target: '@UI.FieldGroup#PersonID',
-        // }
+    UI.HeaderFacets            : [{
+        $Type : 'UI.ReferenceFacet',
+        Label : 'Type of Stamps',
+        ID    : 'TypeofStamps',
+        Target: '@UI.FieldGroup#TypeofStamps',
+    }
+    // {
+    //     $Type : 'UI.ReferenceFacet',
+    //     Label : 'Person ID',
+    //     ID    : 'PersonID',
+    //     Target: '@UI.FieldGroup#PersonID',
+    // }
     ],
     UI.FieldGroup #TypeofStamps: {
         $Type: 'UI.FieldGroupType',
@@ -480,17 +486,17 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #HR: [
     {
         $Type: 'UI.DataField',
         Value: referenceNumber,
-        Label: 'Registration Number',
+        Label: 'AHPRA Number',
     },
     {
         $Type: 'UI.DataField',
         Value: empQualficationStart,
-        Label: 'Registration Validity Start',
+        Label: ' VaccinationValidity Start',
     },
     {
         $Type: 'UI.DataField',
         Value: empQualifictionEnd,
-        Label: 'Registration Validity End',
+        Label: 'VaccinationValidity End',
     },
     {
         $Type: 'UI.DataField',
@@ -505,6 +511,11 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #HR: [
 ]);
 
 annotate service.EHCredentialling with @(UI.LineItem #Credentialling: [
+    {
+        $Type: 'UI.DataField',
+        Value: HHS,
+        Label: 'HHS',
+    },
     // {
     //     $Type: 'UI.DataField',
     //     Value: pid,
@@ -513,52 +524,47 @@ annotate service.EHCredentialling with @(UI.LineItem #Credentialling: [
     {
         $Type: 'UI.DataField',
         Value: AHPRANumber,
-        Label: 'AHPRA Registration Number',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ApprovedScopePractice,
-        Label: 'Approved Scope Practice',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: HHS,
-        Label: 'HHS',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: RequiredSupervisionRequirements,
-        Label: 'Required Supervision Requirements',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ScopePracticeConditions,
-        Label: 'Scope Practice Conditions',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ScopePracticeExpiryDate,
-        Label: 'Scope Practice Expiry Date',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ScopePracticeStartDate,
-        Label: 'Scope Practice Start Date',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ScopePracticeStatus,
-        Label: 'Scope Practice Status',
+        Label: 'AHPRA Number',
     },
     {
         $Type: 'UI.DataField',
         Value: ScopePracticeType,
-        Label: 'Scope Practice Type',
+        Label: 'Scope  of Practice Type',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ScopePracticeStatus,
+        Label: 'Scope  of Practice Status',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ApprovedScopePractice,
+        Label: 'Approved Scope of Practice',
     },
     {
         $Type: 'UI.DataField',
         Value: SubSpecialty,
         Label: 'Sub Specialty',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ScopePracticeStartDate,
+        Label: 'Scope of Practice Start Date',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ScopePracticeExpiryDate,
+        Label: 'Scope of Practice Expiry Date',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ScopePracticeConditions,
+        Label: 'Scope of Practice Conditions',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: RequiredSupervisionRequirements,
+        Label: 'Required Supervision Requirements',
     },
 
 ]);
@@ -573,21 +579,11 @@ annotate service.EHTraining with @(UI.LineItem #EHTraining: [
         $Type: 'UI.DataField',
         Value: CourseID,
         Label: 'Course ID',
-    },    
+    },
     {
         $Type: 'UI.DataField',
         Value: CourseName,
         Label: 'Course Name',
-    },    
-    {
-        $Type: 'UI.DataField',
-        Value: CompletionDate,
-        Label: 'Completion Date',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: ExpiryDate,
-        Label: 'Expiry Date',
     },
     {
         $Type: 'UI.DataField',
@@ -599,13 +595,23 @@ annotate service.EHTraining with @(UI.LineItem #EHTraining: [
         Value: HHSCompleted,
         Label: 'HHS Completed',
     },
+    {
+        $Type: 'UI.DataField',
+        Value: CompletionDate,
+        Label: 'Completion Date',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: ExpiryDate,
+        Label: 'Expiry Date',
+    },
 
 ]);
 
 annotate service.QHProfileGroups with @(UI.Facets: [
     {
         $Type        : 'UI.ReferenceFacet',
-        Label        : 'HR Details',
+        Label        : 'Vaccination',
         ID           : 'HR',
         Target       : 'ProfileNames/@UI.LineItem#HR',
         ![@UI.Hidden]: showt1
@@ -623,6 +629,21 @@ annotate service.QHProfileGroups with @(UI.Facets: [
         ID           : 'EHTraining',
         Target       : 'EHTraining/@UI.LineItem#EHTraining',
         ![@UI.Hidden]: showt3
+    },
+    {
+        $Type        : 'UI.ReferenceFacet',
+        Label        : 'Citizenship/residency/visa',
+        ID           : 'Citizenshipresidencyvisa',
+        Target       : '@UI.FieldGroup#Citizenshipresidencyvisa',
+        ![@UI.Hidden]: showt1
+    },
+    {
+        $Type        : 'UI.ReferenceFacet',
+        Label        : 'Criminal',
+        ID           : 'Criminal',
+        Target       : '@UI.FieldGroup#Criminal',
+        ![@UI.Hidden]: showt1
+
     },
 ]);
 
@@ -689,4 +710,20 @@ annotate service.QHProfileGroups with @(UI.FieldGroup #PersonID: {
         $Type: 'UI.DataField',
         Value: pid,
     }, ],
+});
+
+annotate service.QHProfileGroups with @(UI.FieldGroup #Citizenshipresidencyvisa: {
+    $Type: 'UI.FieldGroupType',
+    Data : [{
+        $Type: 'UI.DataField',
+        Value: 'Citizen'
+    }
+
+
+    ],
+});
+
+annotate service.QHProfileGroups with @(UI.FieldGroup #Criminal: {
+    $Type: 'UI.FieldGroupType',
+    Data : [],
 });

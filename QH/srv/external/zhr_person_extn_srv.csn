@@ -1605,8 +1605,8 @@
           "@sap.filterable": "false"
         },
         "empQualficationStart": {
-          "type": "cds.Timestamp",
-          "@odata.Type": "Edm.DateTime",
+          "type": "cds.Date",
+          "@odata.Type": "Edm.Date",
           "@odata.Precision": 7,
           "@sap.unicode": "false",
           "@sap.label": "Requirement met from",
@@ -1616,8 +1616,8 @@
           "@sap.filterable": "false"
         },
         "empQualifictionEnd": {
-          "type": "cds.Timestamp",
-          "@odata.Type": "Edm.DateTime",
+          "type": "cds.Date",
+          "@odata.Type": "Edm.Date",
           "@odata.Precision": 7,
           "@sap.unicode": "false",
           "@sap.label": "Requirement met until",

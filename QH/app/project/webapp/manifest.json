@@ -125,6 +125,14 @@
                                         "route": "QHPersonnelAssignmentsObjectPage"
                                     }
                                 }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "enableExport": false
+                                        
+                                    }
+                                }
                             }
                         }
                     }
@@ -141,7 +149,6 @@
                                 "ProfileGroups": {
                                     "detail": {
                                         "route": "QHPersonnelAssignments_ProfileGroupsObjectPage"
-                                        
                                     }
                                 }
                             },
@@ -178,6 +185,9 @@
                                         "DataField::PersonNumber": {
                                             "availability": "Hidden"
                                         }
+                                    },
+                                    "tableSettings": {
+                                        "enableExport": false
                                     }
                                 },
                                 "ReProfile/@com.sap.vocabularies.UI.v1.LineItem#Registration": {
@@ -185,6 +195,14 @@
                                         "DataField::pid": {
                                             "availability": "Hidden"
                                         }
+                                    },
+                                    "tableSettings": {
+                                        "enableExport": false
+                                    }
+                                },
+                                "ProfileGroups/@com.sap.vocabularies.UI.v1.LineItem#StampList": {
+                                    "tableSettings": {
+                                        "enableExport": false
                                     }
                                 }
                             }
@@ -207,6 +225,13 @@
                                             "availability": "Hidden"
                                         }
                                     }
+                                },
+                                "ProfileNames/@com.sap.vocabularies.UI.v1.LineItem#HR": {
+                                    "columns": {
+                                        "DataField::qualificationGroup": {
+                                            "availability": "Hidden"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -216,9 +241,7 @@
         },
         "extends": {
             "extensions": {
-                "sap.ui.controllerExtensions": {
-                    
-                }
+                "sap.ui.controllerExtensions": {}
             }
         }
     },

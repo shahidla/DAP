@@ -96,10 +96,10 @@
                 <Property Name="qualificationName" Type="Edm.String" MaxLength="40" Nullable="false"/>
                 <Property Name="rating" Type="Edm.String" MaxLength="4"/>
                 <Property Name="ratingText" Type="Edm.String" MaxLength="40" Nullable="false"/>
-                <Property Name="positionRequirementStart" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="positionRequirementEnd" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="empQualficationStart" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="empQualifictionEnd" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="positionRequirementStart" Type="Edm.Date" Precision="7"/>
+                <Property Name="positionRequirementEnd" Type="Edm.Date" Precision="7"/>
+                <Property Name="empQualficationStart" Type="Edm.Date" Precision="7"/>
+                <Property Name="empQualifictionEnd" Type="Edm.Date" Precision="7"/>
                 <Property Name="referenceNumber" Type="Edm.String" MaxLength="20" Nullable="false"/>
             </EntityType>
         </Schema>

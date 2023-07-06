@@ -42,8 +42,8 @@ service CatalogService {
             qualificationName,
             referenceNumber,
             requiringPositionTitle,
-            empQualficationStart : DateTime,
-            empQualifictionEnd   : DateTime,
+            empQualficationStart : Date,
+            empQualifictionEnd   : Date,
             pid as Pernr         : String,
             ratingText: String
     };
@@ -58,8 +58,8 @@ service CatalogService {
             qualificationName      : String;
             referenceNumber        : String;
             requiringPositionTitle : String;
-            empQualficationStart   : DateTime;
-            empQualifictionEnd     : DateTime;
+            empQualficationStart   : Date;
+            empQualifictionEnd     : Date;
             ratingText: String
     };
 
