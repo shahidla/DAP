@@ -50,13 +50,8 @@
       },
       "zhr_person_extn_srv": {
         "kind": "odata-v2",
-        "model": "srv/external/zhr_person_extn_srv",
-        "[hybrid]": {
-          "credentials": {
-            "destination": "HYHR_DEV",
-            "path": "/sap/opu/odata/sap/ZHR_PERSONS_EXTN_SRV"
-          }
-        }
+        "model": "srv/external/zhr_person_extn_srv"
+  
       },
       "empqfl": {
         "kind": "odata-v2",
