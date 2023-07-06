@@ -130,7 +130,6 @@
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "tableSettings": {
                                         "enableExport": false
-                                        
                                     }
                                 }
                             }
@@ -229,6 +228,9 @@
                                 "ProfileNames/@com.sap.vocabularies.UI.v1.LineItem#HR": {
                                     "columns": {
                                         "DataField::qualificationGroup": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::requiringPositionTitle": {
                                             "availability": "Hidden"
                                         }
                                     }

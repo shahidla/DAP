@@ -491,22 +491,22 @@ annotate service.QHPersonProfleQualifications with @(UI.LineItem #HR: [
     {
         $Type: 'UI.DataField',
         Value: empQualficationStart,
-        Label: ' VaccinationValidity Start',
+        Label: ' Vaccination Validity Start',
     },
     {
         $Type: 'UI.DataField',
         Value: empQualifictionEnd,
-        Label: 'VaccinationValidity End',
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: requiringPositionTitle,
-        Label: 'Requiring Position Title',
+        Label: 'Vaccination Validity End',
     },
     {
         $Type: 'UI.DataField',
         Value: ratingText,
         Label: 'Position Requirement',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requiringPositionTitle,
+        Label: 'Requiring Position Title',
     },
 ]);
 
@@ -632,14 +632,14 @@ annotate service.QHProfileGroups with @(UI.Facets: [
     },
     {
         $Type        : 'UI.ReferenceFacet',
-        Label        : 'Citizenship/residency/visa',
+        Label        : 'Citizenship/Residency/Visa',
         ID           : 'Citizenshipresidencyvisa',
         Target       : '@UI.FieldGroup#Citizenshipresidencyvisa',
         ![@UI.Hidden]: showt1
     },
     {
         $Type        : 'UI.ReferenceFacet',
-        Label        : 'Criminal',
+        Label        : 'Criminal history check',
         ID           : 'Criminal',
         Target       : '@UI.FieldGroup#Criminal',
         ![@UI.Hidden]: showt1
